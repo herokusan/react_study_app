@@ -2,10 +2,10 @@ console.log("Starting App...")
 
 const express = require("express");
 const app = express();
+const router = express.Router();
 
 const mysql = require("mysql2");
-var migration = require('mysql-migrations');
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     connectionLimit : 10,
     host: "localhost",
     user: "root",
@@ -14,10 +14,16 @@ var connection = mysql.createConnection({
 });
 
 
-// migration.init(connection, __dirname + '/migrations', function() {
-//   console.log("Check migrations...");
-//  });
+app.use(express.json({ extendet: true }));
 
+// Роуты
+router.post('/api/registration', (req, res) => {
+  var postData = req.body
+  console.log("TEST TEST TEST")
+  console.log(postData)
+});
+
+//
 
 async function start() {
     try {
