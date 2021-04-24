@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Registration() {
     return(
         <div className = "container mt-5 text-center">
-            <form onSubmit = {}>
+            <form onSubmit>
                 <div class="mb-3 text-center">
                     <label class="form-label">Email</label>
                     <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
