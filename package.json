@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Привет, меня зовут Тарас, это приложение создано специально для дипломной работы, приложение для дистанционного обучения.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taras-lytvynskyi/react_study_app.git"
+  },
+  "author": "Lytvynskyi Taras (lytvynskyi.t@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taras-lytvynskyi/react_study_app/issues"
+  },
+  "homepage": "https://github.com/taras-lytvynskyi/react_study_app#readme"
+}
