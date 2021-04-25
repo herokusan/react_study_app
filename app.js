@@ -3,27 +3,25 @@ console.log("Starting App...")
 const express = require("express");
 const app = express();
 const router = express.Router();
+const authRouter = require('./routes/auth.routes.js');
 
-const mysql = require("mysql2");
-const connection = mysql.createConnection({
-    connectionLimit : 10,
-    host: "localhost",
-    user: "root",
-    database: "distance_learning",
-    password: "lytvynskyi"
-});
+
 
 
 app.use(express.json({ extendet: true }));
-
 // Роуты
-router.post('/api/registration', (req, res) => {
-  var postData = req.body
-  console.log("TEST TEST TEST")
-  console.log(postData)
-});
-
+app.use("/api/auth", require("./routes/auth.routes"));
 //
+
+const mysql = require("mysql2");
+
+const connection = mysql.createConnection({
+  connectionLimit : 10,
+  host: "localhost",
+  user: "root",
+  database: "distance_learning",
+  password: "lytvynskyi"
+});
 
 async function start() {
     try {

@@ -16,7 +16,7 @@ function Login() {
                 </div>
               </div>
               <div>
-                <form action="/login" method="get">
+                <form action="/login" method="GET">
                 <div className="form-group mt-3">
                   <label>Ваш email</label>
                   <input

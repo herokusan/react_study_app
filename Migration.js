@@ -9,6 +9,6 @@ var connection = mysql.createPool({
   password: "lytvynskyi"
 });
 
-migration.init(connection, __dirname + '/migrations', function() {
+migration.init(connection, __dirname + '/db/migrations', function() {
   console.log("Finished running migrations!");
 });
