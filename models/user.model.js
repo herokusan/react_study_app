@@ -1,3 +1,7 @@
+const query = require('../db/db-connection.js');
+
+const { multipleColumnSet } = require('../utils/common.utils');
+const Role = require('../utils/userRoles.utils');
 class UserModel {
     tableName = 'classroom_users';
 
@@ -26,11 +30,11 @@ class UserModel {
         return result[0];
     }
 
-    create = async ({ name, password, email, surname, age }) => {
+    create = async ({name, surname, password, phone,email, sex }) => {
         const sql = `INSERT INTO ${this.tableName}
-        (name, password, surname, email, age) VALUES (?,?,?,?,?,?,?)`;
+        (name,surname, password, phone,email, sex) VALUES (?,?,?,?,?,?)`;
 
-        const result = await query(sql, [name, password, email, surname, age]);
+        const result = await query(sql, [name,surname, password, phone,email, sex]);
         const affectedRows = result ? result.affectedRows : 0;
 
         return affectedRows;

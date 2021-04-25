@@ -116,6 +116,7 @@ class UserController {
 
         // user matched!
         const secretKey = process.env.SECRET_JWT || "";
+
         const token = jwt.sign({ user_id: user.id.toString() }, secretKey, {
             expiresIn: '24h'
         });
@@ -128,6 +129,7 @@ class UserController {
     checkValidation = (req) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
+            console.log(errors)
             throw new HttpException(400, 'Validation faild', errors);
         }
     }

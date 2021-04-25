@@ -3,8 +3,16 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import Login from "./components/login/login.js";
 import Registration from "./components/registration/registration";
+import Home from "./components/home/home.js"
 
-export const useRoutes = () => {
+export const useRoutes = (isAuthenticated) => {
+  if(isAuthenticated){
+    <Switch>
+      <Route path = "/" exact>
+        <Home></Home>
+      </Route>
+    </Switch>
+  }else{
   return (
     <Switch>
       <Route path="/" exact>
@@ -16,4 +24,4 @@ export const useRoutes = () => {
       <Redirect to="/"></Redirect>
     </Switch>
   );
-};
+}};

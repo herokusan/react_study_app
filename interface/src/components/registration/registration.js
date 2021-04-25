@@ -51,7 +51,7 @@ function Registration() {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Номер телефона</label>
-                    <input onChange = {changeHandler} name = "phone" className="form-control"></input>
+                    <input   name = "phone" className="form-control"></input>
                 </div>
                 <button onClick={registerHandelr} type="submit" className="btn btn-primary">Регестрация</button>
                 <br/>

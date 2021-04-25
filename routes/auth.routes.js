@@ -1,33 +1,26 @@
 //This is router for autorization!
+const express = require('express');
+const router = express.Router();
+const userController = require('../controller/user.controller');
+const auth = require('../middleware/auth.middleware');
+const Role = require('../utils/userRoles.utils');
+const awaitHandlerFactory = require('../middleware/awaitHandlerFactory.middleware');
 
-const { Router } = require("express");
-const router = Router();
-const mysql = require("mysql2");
-
-const { check } = require("express-validator");
-
-const connection = mysql.createConnection({
-  connectionLimit : 10,
-  host: "localhost",
-  user: "root",
-  database: "distance_learning",
-  password: "lytvynskyi"
-});
+const { createUserSchema, updateUserSchema, validateLogin } = require('../middleware/validators/userValidator.middleware');
 
 // api/auth/registration
-router.post("/registration", async (req, res) => {
+router.post("/registration", awaitHandlerFactory(userController.createUser));
+
+// api/auth/login
+router.post('/login', validateLogin, awaitHandlerFactory(userController.userLogin), async (req, res) => {
   try {
-    var user = req.body
-    connection.query('INSERT INTO classroom_users SET ?', user, (error, results, 
-      fields) => {
-        if (error) throw error;
-        res.end(JSON.stringify(results));
-    });
-    // res.status(201).json({ message: "User created 😉" });
-  } catch (e) {
-    res.status(500).json({ message: "Something is wrong. Try again" });
+    console.log(req)
+    console.log(res)
+  }
+  catch(e){
+    console.log(e)
   }
 });
 
-// api/auth/login
+
 module.exports = router;
