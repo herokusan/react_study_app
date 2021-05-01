@@ -15,8 +15,18 @@ function App() {
   return (
     <Router>
     <div className="container">
+    <AuthContext.Provider
+        value={{
+          token,
+          login,
+          logout,
+          userId,
+          isAuthenticated
+        }}
+      >
       {isAuthenticated && <Navbar></Navbar>}
       <div>{routes}</div>
+      </AuthContext.Provider>
     </div>
     </Router>
   );

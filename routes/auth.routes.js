@@ -14,16 +14,24 @@ const { createUserSchema, updateUserSchema, validateLogin } = require('../middle
 router.post("/reg", async (req, res) => {
   try {
     var user = req.body
-    console.log(user.password)
-    userController.createUser(user)
-    console.log(test)
+    userController.createUser(user,res)
+    res.status(201).json({ message: "User created 😉" });
   } catch (e) {
     res.status(500).json({ message: "Something is wrong. Try again" });
   }
 })
 
 // api/auth/login
-router.post('/login', validateLogin, awaitHandlerFactory(userController.userLogin) );
+router.post('/login', async (req, res) => {
+  try {
+    var user = req.body
+    console.log(user )
+    userController.userLogin(user,res)
+  } catch (e) {
+    res.status(500).json({ message: "Something is wrong. Try again" });
+  }
+});
 
+//userController.userLogin
 
 module.exports = router;

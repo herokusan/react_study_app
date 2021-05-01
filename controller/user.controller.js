@@ -60,10 +60,10 @@ class UserController {
         const result = await UserModel.create(req);
 
         if (!result) {
-            throw new HttpException(500, 'Something went wrong');
+            throw res.status(500).json({ message: "Something is wrong. Try again" });
         }
 
-        console.log('User was created!');
+        res.status(201).send('User was created!');
     };
 
     updateUser = async (req, res, next) => {
@@ -100,7 +100,7 @@ class UserController {
     userLogin = async (req, res, next) => {
         this.checkValidation(req);
 
-        const { email, password: pass } = req.body;
+        const { email, password: pass } = req;
 
         const user = await UserModel.findOne({ email });
 

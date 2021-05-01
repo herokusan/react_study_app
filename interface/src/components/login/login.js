@@ -20,7 +20,6 @@ function Login() {
       const loginHandelr = async () => {
         try {
           const data = await request("/api/auth/login", "POST", { ...form });
-          console.log(data)
         } catch (e) {
             console.log(e)
         }
