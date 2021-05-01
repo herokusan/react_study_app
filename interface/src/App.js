@@ -26,7 +26,10 @@ function App() {
     }}
   >
     <Router>
-    <div>{routes}</div>
+    <div>
+      {isAuthenticated && <Navbar></Navbar>}
+      {routes}
+    </div>
     <ToastContainer
     position="top-right"
     autoClose={5000}
@@ -38,8 +41,6 @@ function App() {
     draggable
     pauseOnHover
   />
-
-    {isAuthenticated && <Navbar></Navbar>}
     </Router>
     </AuthContext.Provider>
     </>
