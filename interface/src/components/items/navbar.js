@@ -38,17 +38,12 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/resume">
-                Создать вакансию
+                Классы
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/vacancy">
-                Вакансии
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Отклики
+                Создать класс
               </Link>
             </li>
           </ul>

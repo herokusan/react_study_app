@@ -2,7 +2,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { useRoutes } from "./routes";
 import { AuthContext } from "./Context/auth.context";
 import { useAuth } from "./Hooks/auth.hook";
+import { ToastContainer } from "react-toastify";
 import  Navbar from "./components/items/navbar.js"
+import "react-toastify/dist/ReactToastify.css";
 
 import './App.css';
 
@@ -13,22 +15,34 @@ function App() {
   console.log(token)
   const routes = useRoutes(isAuthenticated);
   return (
-    <Router>
-    <div className="container">
+    <>
     <AuthContext.Provider
-        value={{
-          token,
-          login,
-          logout,
-          userId,
-          isAuthenticated
-        }}
-      >
-      {isAuthenticated && <Navbar></Navbar>}
-      <div>{routes}</div>
-      </AuthContext.Provider>
-    </div>
+    value={{
+      token,
+      login,
+      logout,
+      userId,
+      isAuthenticated
+    }}
+  >
+    <Router>
+    <div>{routes}</div>
+    <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+  />
+
+    {isAuthenticated && <Navbar></Navbar>}
     </Router>
+    </AuthContext.Provider>
+    </>
   );
 }
 

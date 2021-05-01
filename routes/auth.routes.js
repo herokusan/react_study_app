@@ -25,13 +25,10 @@ router.post("/reg", async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     var user = req.body
-    console.log(user )
     userController.userLogin(user,res)
   } catch (e) {
     res.status(500).json({ message: "Something is wrong. Try again" });
   }
 });
-
-//userController.userLogin
 
 module.exports = router;

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHttp } from "../../Hooks/http.hook.js";
+import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 import { Link } from "react-router-dom";
 
 function Registration() {
-
-    const { loading, error, request, clearError } = useHttp();
+    const messageError = useMessageError();
+    const messageSuccess = useMessageSuccess();
+    
 
     const [form, setForm] = useState({
         name: "",
@@ -15,6 +17,12 @@ function Registration() {
         phone:""
       });
 
+      const { loading, error, request, clearError } = useHttp();
+      useEffect(() => {
+        messageError(error);
+        clearError();
+      }, [error, messageError, clearError]);
+
     const changeHandler = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value });
       };
@@ -22,14 +30,14 @@ function Registration() {
       const registerHandelr = async () => {
         try {
           const data = await request("/api/auth/reg", "POST", { ...form });
-          console.log(data)
+          messageSuccess(data.message);
         } catch (e) {
             console.log(e)
         }
       };
 
     return(
-        <div className = "container mt-5 text-center">
+        <div className = "container mt-5 text-center shadow-lg p-3 mb-5 bg-white rounded">
             <div className = "mb-5">
                 <h3>Регистрационная форма</h3>
             </div>
