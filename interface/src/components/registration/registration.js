@@ -12,6 +12,7 @@ function Registration() {
         email: "",
         password: "",
         sex: "",
+        phone:""
       });
 
     const changeHandler = (event) => {
@@ -20,7 +21,8 @@ function Registration() {
     
       const registerHandelr = async () => {
         try {
-          const data = await request("/api/auth/registration", "POST", { ...form });
+          const data = await request("/api/auth/reg", "POST", { ...form });
+          console.log(data)
         } catch (e) {
             console.log(e)
         }

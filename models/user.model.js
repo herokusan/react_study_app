@@ -31,10 +31,12 @@ class UserModel {
     }
 
     create = async ({name, surname, password, phone,email, sex }) => {
+        console.log("RESULT RESULT RESULT")
+        console.log(name, surname, password, phone,email, sex)
         const sql = `INSERT INTO ${this.tableName}
-        (name,surname, password, phone,email, sex) VALUES (?,?,?,?,?,?)`;
+        (name,surname,password,phone,email,sex) VALUES (?,?,?,?,?,?)`;
 
-        const result = await query(sql, [name,surname, password, phone,email, sex]);
+        const result = await query(sql, [name,surname,password,phone,email,sex]);
         const affectedRows = result ? result.affectedRows : 0;
 
         return affectedRows;

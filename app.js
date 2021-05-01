@@ -6,38 +6,34 @@ const router = express.Router();
 const authRouter = require('./routes/auth.routes.js');
 const dotenv = require('dotenv');
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const HttpException = require('./utils/HttpException.utils');
-
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
 
 app.use(express.json({ extendet: true }));
-// Роуты
-// 404 error
-dotenv.config();
-// parse requests of content-type: application/json
-// parses incoming requests with JSON payloads
-app.use(express.json());
-// enabling cors for all requests by using cors middleware
-app.use(cors());
-// Enable pre-flight
-app.options("*", cors());
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 app.use("/api/auth", require("./routes/auth.routes"));
+
 //
-
-
-async function start() {
-
-  try {
-    app.listen((PORT = 5000), () => {
-      console.log(`App has been stared on ${PORT}. DB is avalieble`);
-    });
-  } catch (e) {
-    console.log(`Server error ${e.message}`);
-    process.exit(1);
-  }
-}
-start();
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 
 module.exports = app;

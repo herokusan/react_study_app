@@ -57,13 +57,13 @@ class UserController {
 
         await this.hashPassword(req);
 
-        const result = await UserModel.create(req.body);
+        const result = await UserModel.create(req);
 
         if (!result) {
             throw new HttpException(500, 'Something went wrong');
         }
 
-        res.status(201).send('User was created!');
+        console.log('User was created!');
     };
 
     updateUser = async (req, res, next) => {
@@ -136,8 +136,10 @@ class UserController {
 
     // hash password if it exists
     hashPassword = async (req) => {
-        if (req.body.password) {
-            req.body.password = await bcrypt.hash(req.body.password, 8);
+        console.log(req.password)
+        console.log(req)
+        if (req.password) {
+            req.password = await bcrypt.hash(req.password, 8);
         }
     }
 }
