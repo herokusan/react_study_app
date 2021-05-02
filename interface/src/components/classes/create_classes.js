@@ -3,7 +3,7 @@ import { useHttp } from "../../Hooks/http.hook.js";
 import { Link } from "react-router-dom";
 import { Loader } from "../items/loader";
 import { useMessageError, uuseCallbackseMessageSuccess } from "../../Hooks/message.hook";
-function Home() {
+function Create_classes() {
     const [classes, setClasses] = useState([]);
     const { loading, request } = useHttp();
 
@@ -25,7 +25,12 @@ function Home() {
     return(
         <div className = "container">
             <div className = "mt-5">
-                <h1>ALL CLASSES</h1>
+                <h1 className = "text-center">Ваши классы</h1>
+                <div className ="mt-2 text-center">
+                <Link className = "btn btn-success" to = "/create_classes_editor">
+                    Создать новый
+                </Link>
+                </div>
                 <div className="container">
                     {classes.map((classes, index, key) => {
                         return (
@@ -54,4 +59,4 @@ function Home() {
 }
 
 
-export default Home
+export default Create_classes

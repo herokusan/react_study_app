@@ -24,13 +24,13 @@ function Navbar() {
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-            <Link className="nav-link" to="/vacancy">
+            <Link className="nav-link" to="/create_classses">
                 Создать класс
             </Link>
             </li>
             <li class="nav-item">
-            <Link className="nav-link" to="/resume">
-                Мои классы
+            <Link className="nav-link" to="">
+                Подключится к классу
               </Link>
             </li>
             <li class="nav-item">
@@ -46,7 +46,7 @@ function Navbar() {
                 href="#"
                 onClick={logoutHandler}
               >
-                Logout
+                Выход
           </Link>
         </div>
       </div>
