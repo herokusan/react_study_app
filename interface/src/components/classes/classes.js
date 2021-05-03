@@ -3,14 +3,16 @@ import { useHttp } from "../../Hooks/http.hook.js";
 import { Link } from "react-router-dom";
 import { Loader } from "../items/loader";
 import { useMessageError, uuseCallbackseMessageSuccess } from "../../Hooks/message.hook";
-function Create_classes() {
+
+
+function Classes() {
     const [classes, setClasses] = useState([]);
     const { loading, request } = useHttp();
 
     const classFeched = useCallback(async () => {
         try {
           const feched = await request("/api/classes/myclasses", "GET", null);
-          console.log(feched)
+          console.log(feched);
           setClasses(feched);
         } catch (e) {}
       }, [request]);
@@ -27,7 +29,7 @@ function Create_classes() {
             <div className = "mt-5">
                 <h1 className = "text-center">Ваши классы</h1>
                 <div className ="mt-2 text-center">
-                <Link className = "btn btn-success" to = "/create_classes_editor">
+                <Link className = "btn btn-success" to = "/create_classes">
                     Создать новый
                 </Link>
                 </div>
@@ -59,4 +61,4 @@ function Create_classes() {
 }
 
 
-export default Create_classes
+export default Classes

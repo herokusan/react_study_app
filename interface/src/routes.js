@@ -4,7 +4,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./components/login/login.js";
 import Registration from "./components/registration/registration";
 import Home from "./components/home/home"
-import Create_classes from "./components/classes/create_classes"
+import Classes from "./components/classes/classes"
+import CreateClasses from "./components/classes/crate_classes"
 
 export const useRoutes = (isAuthenticated) => {
   if(isAuthenticated){
@@ -13,8 +14,11 @@ export const useRoutes = (isAuthenticated) => {
       <Route path = "/" exact>
         <Home></Home>
       </Route>
-      <Route path = "/create_classses">
-        <Create_classes></Create_classes>
+      <Route path = "/classses">
+        <Classes></Classes>
+      </Route>
+      <Route path = "/create_classes">
+        <CreateClasses></CreateClasses>
       </Route>
       <Redirect to = "/"></Redirect>
     </Switch>

@@ -48,18 +48,15 @@ class ClassesController {
         res.send(userWithoutPassword);
     };
 
-    createUser = async (req, res, next) => {
-        this.checkValidation(req);
+    createClass = async (req, res, next) => {
 
-        await this.hashPassword(req);
-
-        const result = await UserModel.create(req);
+        const result = await ClassesModel.create(req);
 
         if (!result) {
             throw res.status(500).json({ message: "Something is wrong. Try again" });
         }
 
-        res.status(201).send('User was created!');
+        res.status(201).send('Class was created!');
     };
 
     updateUser = async (req, res, next) => {

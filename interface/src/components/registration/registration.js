@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHttp } from "../../Hooks/http.hook.js";
+import { useHistory } from "react-router-dom";
 import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 import { Link } from "react-router-dom";
 
 function Registration() {
     const messageError = useMessageError();
     const messageSuccess = useMessageSuccess();
-    
+    const history = useHistory();
 
     const [form, setForm] = useState({
         name: "",
@@ -30,6 +31,7 @@ function Registration() {
       const registerHandelr = async () => {
         try {
           const data = await request("/api/auth/reg", "POST", { ...form });
+          history.push(`/`);
           messageSuccess(data.message);
         } catch (e) {
             console.log(e)
@@ -66,7 +68,7 @@ function Registration() {
                     <label className="form-label">Номер телефона</label>
                     <input onChange = {changeHandler} placeholder = "Номер телефона"  name = "phone" className="form-control"></input>
                 </div>
-                <button onClick={registerHandelr} type="submit" className="btn btn-primary">Регестрация</button>
+                <button onClick={registerHandelr} disabled={loading} type="submit" className="btn btn-primary">Регестрация</button>
                 <br/>
                 <hr></hr>
                 <Link className ="btn" to ="/login">Логин</Link>

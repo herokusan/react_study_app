@@ -35,6 +35,7 @@ function Login() {
           auth.login(data.token, data.email, data.id);
           messageSuccess("Привет " + data.name + " 😃 ");
         } catch (e) {
+            console.log(e)
             messageError(e);
         }
       };

@@ -29,12 +29,12 @@ class ClassesModel {
         return result[0];
     }
 
-    create = async ({}) => {
+    create = async ({class_name,subject}) => {
 
         const sql = `INSERT INTO ${this.tableName}
-        (name,surname,password,phone,email,sex) VALUES (?,?,?,?,?,?)`;
+        (class_name,subject) VALUES (?,?)`;
 
-        const result = await query(sql, [name,surname,password,phone,email,sex]);
+        const result = await query(sql, [class_name,subject]);
         const affectedRows = result ? result.affectedRows : 0;
 
         return affectedRows;

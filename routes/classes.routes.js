@@ -11,7 +11,6 @@ const { createUserSchema, updateUserSchema, validateLogin } = require('../middle
 // router.post("/registrations", awaitHandlerFactory(userController.createUser));
 router.get("/myclasses", async (req, res) => {
   try {
-    console.log(req.user)
     const myclass = await ClassesController.getAllClasses({ owner: req.user.userId });
     res.json(myclass);
   } catch (e) {
@@ -21,10 +20,12 @@ router.get("/myclasses", async (req, res) => {
 
 router.post("/create_class", async (req,res) => {
     try{
-
-    res.status(201).json({ message: "Class created 😉" });
+    var create_class = req.body
+    ClassesController.createClass(create_class,res)
+    res.status(201).json({ message: "Class was created 😉" });
+    // res.status(201).json({ message: "Class created 😉" });
     } catch(e){
-
+      res.status(500).json({ message: "Something is wrong. Try again" });
     }
 })
 

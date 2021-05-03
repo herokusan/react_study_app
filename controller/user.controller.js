@@ -63,7 +63,7 @@ class UserController {
             throw res.status(500).json({ message: "Something is wrong. Try again" });
         }
 
-        res.status(201).send('User was created!');
+        res.status(201).json({ message: "User created 😉" });
     };
 
     updateUser = async (req, res, next) => {
@@ -105,7 +105,7 @@ class UserController {
         const user = await UserModel.findOne({ email });
 
         if (!user) {
-            throw new HttpException(401, 'Unable to login!');
+            throw res.status(401).json({message: "Unable to login!"})
         }
 
         const isMatch = await bcrypt.compare(pass, user.password);
