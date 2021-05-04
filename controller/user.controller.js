@@ -25,14 +25,17 @@ class UserController {
     };
 
     getUserById = async (req, res, next) => {
-        const user = await UserModel.findOne({ id: req.params.id });
+        console.log(req)
+        console.log("USERRRRRRRRRRRRRRRRRRR")
+        const user = await UserModel.findOne({ id: req });
         if (!user) {
             throw new HttpException(404, 'User not found');
         }
+        console.log(user.name)
 
-        const { password, ...userWithoutPassword } = user;
+        // const { password, ...userWithoutPassword } = user;
 
-        res.send(userWithoutPassword);
+        res.send(user);
     };
 
     getUserByuserName = async (req, res, next) => {

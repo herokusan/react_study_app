@@ -1,6 +1,8 @@
 const ClassesModel = require('../models/classes.model');
 const HttpException = require('../utils/HttpException.utils');
 const { validationResult } = require('express-validator');
+const UserModel = require('../models/user.model');
+const UserController = require('../controller/user.controller');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 
@@ -9,8 +11,9 @@ class ClassesController {
     // don't touch
     getAllClasses = async (req, res, next) => {
         let ClassesList = await ClassesModel.find();
-        if (!ClassesList.length) {
-            throw new HttpException(404, 'Users not found');
+
+        if(!ClassesList){
+            res.send("Not Classes")
         }
 
         ClassesList = ClassesList.map(classes => {
@@ -19,16 +22,30 @@ class ClassesController {
 
         res.send(ClassesList);
     };
+    getAllUserClasess = async (params,res) => {
+        console.log("2222222222222222222222222222222")
+        console.log(params)
+        // const user = await UserModel.find({user_created: params});
+        const classes = await ClassesModel.findByUserCreated({user_created :params })
+        console.log(classes)
+        res.send(classes);
+    }
 
     getUserById = async (req, res, next) => {
-        const user = await UserModel.findOne({ id: req.params.id });
-        if (!user) {
+        const userClass = await ClassesModel.findByUser({ user_created: 1 });
+
+        UserClassList = userClass.map(classes => {
+            return classes
+        })
+
+
+        console.log(UserClassList)
+        if (!UserClassList) {
             throw new HttpException(404, 'User not found');
         }
 
-        const { password, ...userWithoutPassword } = user;
 
-        res.send(userWithoutPassword);
+        res.send(UserClassList);
     };
 
     getUserByuserName = async (req, res, next) => {
@@ -48,9 +65,8 @@ class ClassesController {
         res.send(userWithoutPassword);
     };
 
-    createClass = async (req, res, next) => {
-
-        const result = await ClassesModel.create(req);
+    createClass = async (req,res, next, user_id) => {
+        const result = await ClassesModel.create(req,user_id);
 
         if (!result) {
             throw res.status(500).json({ message: "Something is wrong. Try again" });

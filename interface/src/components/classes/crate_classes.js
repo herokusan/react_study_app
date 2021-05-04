@@ -2,13 +2,14 @@ import React, { useState,useCallback,useContext, useEffect } from "react";
 import { useHttp } from "../../Hooks/http.hook.js";
 import { Link } from "react-router-dom";
 import { Loader } from "../items/loader";
+import { AuthContext } from "../../Context/auth.context";
 import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 
 
 function CreateClasses() {
     const messageError = useMessageError();
     const messageSuccess = useMessageSuccess();
-    
+    const auth = useContext(AuthContext);
 
     const [form, setForm] = useState({
         class_name: "",
@@ -27,7 +28,7 @@ function CreateClasses() {
     
       const createClassesHandler = async () => {
         try {
-          const data = await request("/api/classes/create_class", "POST", { ...form });
+          const data = await request("/api/classes/create_class", "POST", { ...form }, {user_id:auth.user_id});
           messageSuccess(data.message);
         } catch (e) {
             console.log(e)

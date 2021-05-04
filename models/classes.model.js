@@ -1,4 +1,5 @@
 const query = require('../db/db-connection.js');
+const UserModel = require('../models/user.model');
 
 const { multipleColumnSet } = require('../utils/common.utils');
 class ClassesModel {
@@ -17,6 +18,16 @@ class ClassesModel {
         return await query(sql, [...values]);
     }
 
+    findByUserCreated = async (params) => {
+        const { columnSet, values } = multipleColumnSet(params)
+        const sql = `SELECT * FROM ${this.tableName}
+        WHERE ${columnSet}`;
+        const result = await query(sql, [...values]);
+        console.log("RRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEE")
+        console.log(result[0])
+        return result;
+    }
+
     findOne = async (params) => {
         const { columnSet, values } = multipleColumnSet(params)
 
@@ -29,12 +40,13 @@ class ClassesModel {
         return result[0];
     }
 
-    create = async ({class_name,subject}) => {
-
+    create = async ({class_name,subject}, user_id) => {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+        console.log(user_id)
         const sql = `INSERT INTO ${this.tableName}
-        (class_name,subject) VALUES (?,?)`;
+        (class_name,subject,user_created) VALUES (?,?,?)`;
 
-        const result = await query(sql, [class_name,subject]);
+        const result = await query(sql, [class_name,subject,user_id]);
         const affectedRows = result ? result.affectedRows : 0;
 
         return affectedRows;

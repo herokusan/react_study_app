@@ -30,9 +30,7 @@ function Login() {
       const loginHandelr = async () => {
         try {
           const data = await request("/api/auth/login", "POST", { ...form });
-          console.log(data)
-          console.log('1123123131')
-          auth.login(data.token, data.email, data.id);
+          auth.login(data.token, data.id);
           messageSuccess("Привет " + data.name + " 😃 ");
         } catch (e) {
             console.log(e)

@@ -9,10 +9,10 @@ import "react-toastify/dist/ReactToastify.css";
 import './App.css';
 
 function App() {
-  const { token, userId, login, logout } = useAuth();
+  const { token, user_id, login, logout } = useAuth();
   const isAuthenticated = !!token;
-
-  console.log(token)
+  console.log("TTTTTTTTTTTTTTTTTTTTTTTT")
+  console.log(user_id)
   const routes = useRoutes(isAuthenticated);
   return (
     <>
@@ -21,7 +21,7 @@ function App() {
       token,
       login,
       logout,
-      userId,
+      user_id,
       isAuthenticated
     }}
   >

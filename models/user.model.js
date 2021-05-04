@@ -31,8 +31,6 @@ class UserModel {
     }
 
     create = async ({name, surname, password, phone,email, sex }) => {
-        console.log("RESULT RESULT RESULT")
-        console.log(name, surname, password, phone,email, sex)
         const sql = `INSERT INTO ${this.tableName}
         (name,surname,password,phone,email,sex) VALUES (?,?,?,?,?,?)`;
 
