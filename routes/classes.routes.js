@@ -12,11 +12,29 @@ const { createUserSchema, updateUserSchema, validateLogin } = require('../middle
 // router.post("/registrations", awaitHandlerFactory(userController.createUser));
 router.get("/myclasses", async (req, res) => {
   try {
-    console.log(req.headers.user_id)
     const myclass = await ClassesController.getAllUserClasess(req.headers.user_id,res);
     res.json(myclass);
   } catch (e) {
-    res.status(500).json({ message: "Something is wrong. Try again" });
+    console.log(e)
+    // res.status(500).json({ message: "Something is wrong. Try again :(" });
+  }
+})
+
+router.get("/about_classes/:id", async(req,res) => {
+  try{
+    const about_class = await ClassesController.getClassesById(req.params.id,res)
+    res.json(about_class)
+  }catch(e){
+    // res.status(500).json({message:"Something is wrong. Try again :("})
+  }
+})
+
+router.get("/connected_classes", async(req,res) => {
+  try{
+    const user_id = await req.headers.user_id
+    const user_connected_classes = await ClassesController.getConnectedClasses(user_id, res)
+  } catch(e){
+    res.status(500).json({message:"Something is wrong. Try again :("})
   }
 })
 

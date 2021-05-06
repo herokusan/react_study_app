@@ -34,14 +34,13 @@ function Home() {
                             <div className="mt-1">
                             <div className="card-body">
                                 {/* <Link to={`/detail/${job._id}`} className="text-warning"> */}
-                                <h5 className="card-title">{classes.class_name}</h5>
+                                <Link to = {`/aboutclass/${classes.id}`}><h5 className="card-title">{classes.class_name}</h5></Link>
                                 {/* </Link> */}
-                                <p className="card-text">Описание: {classes.users}</p>
+                                <p className="card-text">Предмет: {classes.subject}</p>
                                 <p className="card-text">
                                 Создатель <b>{classes.user_created}</b>
                                 </p>
                                 <p className="card-text">
-                                {/* Дата размещения: {new Date(job.data).toLocaleDateString()} */}
                                 </p>
                             </div>
                             </div>

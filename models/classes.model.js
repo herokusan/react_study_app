@@ -18,12 +18,22 @@ class ClassesModel {
         return await query(sql, [...values]);
     }
 
+    findById = async(params) => {
+        const sql = `SELECT * FROM ${this.tableName} WHERE id = ${params.id}`
+        const result = await query(sql);
+        console.log(result)
+        return result[0]
+    }
+    findUserConnectedClasses = async (params) => {
+        const {user_id} = multipleColumnSet(params)
+        const sql = `SELECT * FROM ${this.tableName}`
+        console.log(sql);
+    }
     findByUserCreated = async (params) => {
         const { columnSet, values } = multipleColumnSet(params)
         const sql = `SELECT * FROM ${this.tableName}
         WHERE ${columnSet}`;
         const result = await query(sql, [...values]);
-        console.log("RRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEE")
         console.log(result[0])
         return result;
     }

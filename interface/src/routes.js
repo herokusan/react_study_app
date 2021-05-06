@@ -6,6 +6,7 @@ import Registration from "./components/registration/registration";
 import Home from "./components/home/home"
 import Classes from "./components/classes/classes"
 import CreateClasses from "./components/classes/crate_classes"
+import AboutClass from "./components/classes/about_class"
 
 export const useRoutes = (isAuthenticated) => {
   if(isAuthenticated){
@@ -20,6 +21,9 @@ export const useRoutes = (isAuthenticated) => {
       <Route path = "/create_classes">
         <CreateClasses></CreateClasses>
       </Route>
+      <Route path="/aboutclass/:id">
+          <AboutClass></AboutClass>
+        </Route>
       <Redirect to = "/"></Redirect>
     </Switch>
     )}

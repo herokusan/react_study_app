@@ -23,29 +23,19 @@ class ClassesController {
         res.send(ClassesList);
     };
     getAllUserClasess = async (params,res) => {
-        console.log("2222222222222222222222222222222")
-        console.log(params)
-        // const user = await UserModel.find({user_created: params});
         const classes = await ClassesModel.findByUserCreated({user_created :params })
         console.log(classes)
         res.send(classes);
     }
+    getConnectedClasses = async(user_id,res) => {
+        const connected_classes = await ClassesModel.findUserConnectedClasses({user_id:user_id})
+        res.send(connected_classes)
+    }
 
-    getUserById = async (req, res, next) => {
-        const userClass = await ClassesModel.findByUser({ user_created: 1 });
-
-        UserClassList = userClass.map(classes => {
-            return classes
-        })
-
-
-        console.log(UserClassList)
-        if (!UserClassList) {
-            throw new HttpException(404, 'User not found');
-        }
-
-
-        res.send(UserClassList);
+    getClassesById = async (req, res) => {
+        const class_by_id = await ClassesModel.findById({ id: req });
+        console.log(class_by_id)
+        res.send(class_by_id);
     };
 
     getUserByuserName = async (req, res, next) => {
