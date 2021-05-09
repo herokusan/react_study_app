@@ -30,7 +30,7 @@ function ConnectedClasses() {
       const createClassesHandler = async () => {
         try {
           const data = await request("/api/classes/connect_to_class", "POST", { ...form }, {user_id:auth.user_id});
-        //   history.push(`/`);
+          history.push(`/`);
           console.log(data)
           messageSuccess(data.message);
         } catch (e) {

@@ -32,8 +32,13 @@ function ClassesNews() {
       return <Loader></Loader>;
     }
     return(
-        <div>
-           <h1>Новости Класса!!!!!!!!!!!!</h1>
+        <div className = "mt-3 p-2">
+         <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Напишите новость..." aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Отправить</button>
+            </div>
+          </div>
         </div>
     )
 }

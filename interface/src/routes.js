@@ -8,6 +8,7 @@ import Classes from "./components/classes/classes"
 import CreateClasses from "./components/classes/crate_classes"
 import AboutClass from "./components/classes/about_class"
 import ConnecteToClass from "./components/connect/connect_to_class"
+import Profile from "./components/user/profile"
 
 export const useRoutes = (isAuthenticated) => {
   if(isAuthenticated){
@@ -27,6 +28,9 @@ export const useRoutes = (isAuthenticated) => {
       </Route>
       <Route path = "/connect_to_class">
           <ConnecteToClass></ConnecteToClass>
+      </Route>
+      <Route path = "/profile">
+          <Profile></Profile>
       </Route>
       <Redirect to = "/"></Redirect>
     </Switch>

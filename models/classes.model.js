@@ -30,13 +30,14 @@ class ClassesModel {
             let add_user = true
             if(!find_class[0].users){
                 find_class[0].users = []
+                find_class[0].users.push(parseInt(user_id))
             }else{
                await find_class[0].users.map((user) => {
                     if(user == parseInt(user_id)){
                          add_user = false
                     }
                 })
-                find_class[0].users.push(parseInt(user_id))
+            await find_class[0].users.push(parseInt(user_id))
             }
             if(add_user){
                 await query(`UPDATE ${this.tableName} SET users = "[${find_class[0].users}]" WHERE id = ${find_class[0].id}`)

@@ -44,13 +44,14 @@ function AboutClass() {
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Задания</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Учасники</button>
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Ученики</button>
             </li>
             </ul>
-            <div>
-            <h1 className = "mt-5 mb-5 text-center">Класс {classes.class_name}</h1>
-            <label className ="text-center">Код доступа класса: {classes.access_code}</label>
+            <div className = "text-center text-dark p-3">
+            <h2>Класс {classes.class_name}</h2>
+            <label>Код доступа в класс: <b className = "text-success">{classes.access_code}</b></label>
             </div>
+            <hr></hr>
             <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <ClassNews></ClassNews>
