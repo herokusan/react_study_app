@@ -24,8 +24,7 @@ class ClassesController {
     };
     getAllUserClasess = async (params,res) => {
         const classes = await ClassesModel.findByUserCreated({user_created :params })
-        console.log(classes)
-        res.send('123123',classes);
+        res.send(classes);
     }
 
     connectToClass = async(res,code,user_id) => {

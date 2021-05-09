@@ -65,13 +65,6 @@ router.post("/connect_to_class", async(req,res) => {
         res.status(201).json({ message: "Вы успешно подключились к классу! 😉"});
     }
   }catch(e){
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
-    console.log(e)
     res.status(500).json({ message: "Something is wrong. Try again" });
   }
 })
