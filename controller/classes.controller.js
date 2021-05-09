@@ -25,8 +25,15 @@ class ClassesController {
     getAllUserClasess = async (params,res) => {
         const classes = await ClassesModel.findByUserCreated({user_created :params })
         console.log(classes)
-        res.send(classes);
+        res.send('123123',classes);
     }
+
+    connectToClass = async(res,code,user_id) => {
+        const result = await ClassesModel.connectToClass(res,code,user_id);
+        // res.status(201).send('Connect to class!', result);
+        return result
+    }
+
     getConnectedClasses = async(user_id,res) => {
         const connected_classes = await ClassesModel.findUserConnectedClasses({user_id:user_id})
         res.send(connected_classes)
@@ -62,7 +69,7 @@ class ClassesController {
             throw res.status(500).json({ message: "Something is wrong. Try again" });
         }
 
-        res.status(201).send('Class was created!');
+        res.status(201).send('Class was created!', result);
     };
 
     updateUser = async (req, res, next) => {

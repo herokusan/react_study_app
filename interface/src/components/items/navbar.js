@@ -14,43 +14,43 @@ function Navbar() {
   return (
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <Link to="/" className="navbar-brand" href="#">
-          Домой
-        </Link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <Link className="nav-link" to="/classses">
-                Создать класс
-            </Link>
-            </li>
-            <li class="nav-item">
-            <Link className="nav-link" to="">
-                Подключится к классу
-              </Link>
-            </li>
-            <li class="nav-item">
-            <Link className="nav-link" to="/profile">
-                Профиль <span className="sr-only"></span>
-              </Link>
-            </li>
-          </ul>
-          <Link
-                to="/"
-                id="btn-logout"
-                className="ml-3 btn btn-outline-dark text-white"
-                href="#"
-                onClick={logoutHandler}
-              >
-                Выход
+        <div class="container-fluid">
+          <Link to="/" className="navbar-brand" href="#">
+            Домой
           </Link>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+              <Link className="nav-link" to="/classses">
+                  Создать класс
+              </Link>
+              </li>
+              <li class="nav-item">
+              <Link className="nav-link" to="/connect_to_class">
+                  Подключится к классу
+                </Link>
+              </li>
+              <li class="nav-item">
+              <Link className="nav-link" to="/profile">
+                  Профиль <span className="sr-only"></span>
+                </Link>
+              </li>
+            </ul>
+            <Link
+                  to="/"
+                  id="btn-logout"
+                  className="ml-3 btn btn-outline-dark text-white"
+                  href="#"
+                  onClick={logoutHandler}
+                >
+                  Выход
+            </Link>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     </div>
   );
 }

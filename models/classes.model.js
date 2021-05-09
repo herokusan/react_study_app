@@ -24,10 +24,36 @@ class ClassesModel {
         console.log(result)
         return result[0]
     }
+    connectToClass = async(res,code,user_id) => {
+        const find_class = await query(`SELECT * FROM ${this.tableName} WHERE access_code = ${code.access_code}`)
+        if(find_class.length > 0){
+            let add_user = true
+            if(!find_class[0].users){
+                find_class[0].users = []
+            }else{
+               await find_class[0].users.map((user) => {
+                    if(user == parseInt(user_id)){
+                         add_user = false
+                    }
+                })
+                find_class[0].users.push(parseInt(user_id))
+            }
+            if(add_user){
+                await query(`UPDATE ${this.tableName} SET users = "[${find_class[0].users}]" WHERE id = ${find_class[0].id}`)
+            }else{
+                return 0
+            }
+            
+        }else{
+            return 1
+        }
+    }
+
     findUserConnectedClasses = async (params) => {
         const {user_id} = multipleColumnSet(params)
-        const sql = `SELECT * FROM ${this.tableName}`
-        console.log(sql);
+        const sql = `SELECT * FROM ${this.tableName} WHERE JSON_CONTAINS(users, "${params.user_id}")`
+        const result = await query(sql)
+        return result
     }
     findByUserCreated = async (params) => {
         const { columnSet, values } = multipleColumnSet(params)
@@ -51,12 +77,13 @@ class ClassesModel {
     }
 
     create = async ({class_name,subject}, user_id) => {
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
-        console.log(user_id)
+        const access_code = Math.floor(Math.random() * 1000)
         const sql = `INSERT INTO ${this.tableName}
-        (class_name,subject,user_created) VALUES (?,?,?)`;
+        (class_name,subject,user_created, access_code) VALUES (?,?,?,?)`;
 
-        const result = await query(sql, [class_name,subject,user_id]);
+        console.log(access_code)
+
+        const result = await query(sql, [class_name,subject,user_id, access_code]);
         const affectedRows = result ? result.affectedRows : 0;
 
         return affectedRows;

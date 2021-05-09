@@ -7,6 +7,7 @@ import Home from "./components/home/home"
 import Classes from "./components/classes/classes"
 import CreateClasses from "./components/classes/crate_classes"
 import AboutClass from "./components/classes/about_class"
+import ConnecteToClass from "./components/connect/connect_to_class"
 
 export const useRoutes = (isAuthenticated) => {
   if(isAuthenticated){
@@ -23,7 +24,10 @@ export const useRoutes = (isAuthenticated) => {
       </Route>
       <Route path="/aboutclass/:id">
           <AboutClass></AboutClass>
-        </Route>
+      </Route>
+      <Route path = "/connect_to_class">
+          <ConnecteToClass></ConnecteToClass>
+      </Route>
       <Redirect to = "/"></Redirect>
     </Switch>
     )}

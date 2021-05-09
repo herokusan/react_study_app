@@ -47,7 +47,10 @@ function AboutClass() {
                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Учасники</button>
             </li>
             </ul>
+            <div>
             <h1 className = "mt-5 mb-5 text-center">Класс {classes.class_name}</h1>
+            <label className ="text-center">Код доступа класса: {classes.access_code}</label>
+            </div>
             <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <ClassNews></ClassNews>
