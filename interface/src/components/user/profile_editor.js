@@ -74,7 +74,6 @@ function ProfileEditor() {
                 onChange = {changeHandler}
                 type = "text"
                 value = {user.surname}
-                readonly = {false}
                 className = "form-control"
                 placeholder = "Фамилия"
                 name = "surname"></input>

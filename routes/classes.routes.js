@@ -49,6 +49,23 @@ router.get("/connected_classes", async(req,res) => {
   }
 })
 
+router.get("/all_news_classes", async(req,res) => {
+  try{
+    const classid = req.headers.classid
+    const classes_news = await ClassesController.findAllClassNews(classid, res)
+    console.log("LLLLLLLL")
+    console.log(classes_news)
+    if(classes_news){
+      res.json(classes_news)
+    }else{
+      res.status(200)
+    }
+    
+  } catch(e){
+    res.status(500).json({message:"Something is wrong. Try again :("})
+  }
+})
+
 router.post("/connect_to_class", async(req,res) => {
   try{
     const code = req.body
@@ -79,6 +96,18 @@ router.post("/create_class", async (req,res) => {
     } catch(e){
       res.status(500).json({ message: "Something is wrong. Try again" });
     }
+})
+
+router.post("/create_content", async (req,res) => {
+  try{
+  const create_class = req.body
+  const classId = req.headers.classid
+  const userId = req.headers.userid
+  const newConetnt = ClassesController.createContent(classId,create_class,userId,res)
+  res.status(201).json({ message: " Новость опубликована!", id:res.id});
+  } catch(e){
+    res.status(500).json({ message: "Something is wrong. Try again" });
+  }
 })
 
 module.exports = router;

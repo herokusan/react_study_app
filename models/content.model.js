@@ -2,8 +2,8 @@ const query = require('../db/db-connection.js');
 const UserModel = require('../models/user.model');
 
 const { multipleColumnSet } = require('../utils/common.utils');
-class ClassesModel {
-    tableName = 'classroom_classes';
+class ContentModel {
+    tableName = 'classroom_content';
 
     find = async (params = {}) => {
         let sql = `SELECT * FROM ${this.tableName}`;
@@ -21,6 +21,7 @@ class ClassesModel {
     findById = async(params) => {
         const sql = `SELECT * FROM ${this.tableName} WHERE id = ${params.id}`
         const result = await query(sql);
+        console.log(result)
         return result[0]
     }
     connectToClass = async(res,code,user_id) => {
@@ -55,11 +56,10 @@ class ClassesModel {
         const result = await query(sql)
         return result
     }
-    findByUserCreated = async (params) => {
-        const { columnSet, values } = multipleColumnSet(params)
+    findAllNews = async (clasid) => {
         const sql = `SELECT * FROM ${this.tableName}
-        WHERE ${columnSet}`;
-        const result = await query(sql, [...values]);
+        WHERE class_id = ${clasid}`;
+        const result = await query(sql);
         return result;
     }
 
@@ -75,16 +75,12 @@ class ClassesModel {
         return result[0];
     }
 
-    create = async ({class_name,subject}, user_id) => {
-        const access_code = Math.floor(Math.random() * 1000)
+    create = async (classId, content,userid) => {
+        console.log(content)
         const sql = `INSERT INTO ${this.tableName}
-        (class_name,subject,user_created, access_code) VALUES (?,?,?,?)`;
-
-
-        const result = await query(sql, [class_name,subject,user_id, access_code]);
-        const affectedRows = result ? result.affectedRows : 0;
-
-        return affectedRows;
+        (class_id,content,user_id) VALUES (?,?,?)`;
+        const result = await query(sql, [classId,content.content,userid]);
+        return result;
     }
 
     update = async (params, id) => {
@@ -95,6 +91,9 @@ class ClassesModel {
         const result = await query(sql, [...values, id]);
 
         return result;
+    }
+    createContetnt = async (classId, content) => {
+        const sql = `INSERT INTO ${this.tableName}`
     }
 
     delete = async (id) => {
@@ -107,4 +106,4 @@ class ClassesModel {
     }
 }
 
-module.exports = new ClassesModel;
+module.exports = new ContentModel;

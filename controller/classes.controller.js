@@ -3,6 +3,7 @@ const HttpException = require('../utils/HttpException.utils');
 const { validationResult } = require('express-validator');
 const UserModel = require('../models/user.model');
 const UserController = require('../controller/user.controller');
+const ContentModel = require('../models/content.model')
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 
@@ -40,7 +41,6 @@ class ClassesController {
 
     getClassesById = async (req, res) => {
         const class_by_id = await ClassesModel.findById({ id: req });
-        console.log(class_by_id)
         res.send(class_by_id);
     };
 
@@ -60,6 +60,24 @@ class ClassesController {
 
         res.send(userWithoutPassword);
     };
+
+    findAllClassNews = async(clasid, res) => {
+        const result = await ContentModel.findAllNews(clasid, res)
+        if(!result){
+            res.status(500).json({ message: "Something is wrong. Try again" });
+        }
+        return result
+    }
+
+
+    createContent = async(classId,content,userid,res) => {
+        const result = await ContentModel.create(classId, content, userid)
+
+        if(!result){
+            res.status(500).json({ message: "Something is wrong. Try again" });
+        }
+        res.status(201)
+    }
 
     createClass = async (req,res, next, user_id) => {
         const result = await ClassesModel.create(req,user_id);
@@ -141,8 +159,6 @@ class ClassesController {
 
     // hash password if it exists
     hashPassword = async (req) => {
-        console.log(req.password)
-        console.log(req)
         if (req.password) {
             req.password = await bcrypt.hash(req.password, 8);
         }

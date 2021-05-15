@@ -35,6 +35,7 @@ function Profile() {
                 <p>Фамилия: {user.surname}</p>
                 <p>Город: {user.city}</p>
                 <p>Email: {user.email}</p>
+                <p>Возраст: {user.age}</p>
             </div>
             <hr></hr>
         </div>
