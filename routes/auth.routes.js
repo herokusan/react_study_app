@@ -15,7 +15,7 @@ router.post("/reg", async (req, res) => {
   try {
     var user = req.body
     userController.createUser(user,res)
-    res.status(201).json({ message: "User created 😉" });
+    res.status(201).json({ message: "Пользователь успешно зарегистрирован! 😉" });
   } catch (e) {
     res.status(500).json({ message: "Something is wrong. Try again" });
   }
@@ -30,5 +30,27 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: "Something is wrong. Try again" });
   }
 });
+
+router.get('/user', async(req,res) => {
+  try{
+    var userId = req.headers.userid
+    console.log(userId)
+    console.log(req.headers.userid)
+    const user = await userController.getUserById(userId,res)
+    res.json(user)
+  }catch(e){
+    res.status(500).json({ message: "Something is wrong. Try again" });
+  }
+})
+router.post('/edit_profile', async(req,res) => {
+  try{
+    var user = req.body
+    userController.updateUser(user,res)
+    res.status(201).json({ message: "Данные обновлены! 😉" });
+    update
+  }catch(e){
+    res.status(500).json({ message: "Something is wrong. Try again" });
+  }
+})
 
 module.exports = router;
