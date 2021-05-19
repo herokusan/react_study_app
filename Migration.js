@@ -1,6 +1,8 @@
 var mysql = require('mysql');
 var migration = require('mysql-migrations');
 
+
+//DEVELOPMENT SERVER
 var connection = mysql.createPool({
   connectionLimit : 10,
   host: "localhost",
@@ -10,5 +12,5 @@ var connection = mysql.createPool({
 });
 
 migration.init(connection, __dirname + '/db/migrations', function() {
-  console.log("Finished running migrations!");
+  console.log("MIGRATION FINISHED!");
 });

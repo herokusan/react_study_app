@@ -6,9 +6,6 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
-/******************************************************************************
- *                              User Controller
- ******************************************************************************/
 class UserController {
     getAllUsers = async (req, res, next) => {
         let userList = await UserModel.find();
@@ -147,9 +144,4 @@ class UserController {
     }
 }
 
-
-
-/******************************************************************************
- *                               Export
- ******************************************************************************/
 module.exports = new UserController;
