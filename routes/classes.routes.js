@@ -62,7 +62,8 @@ router.get("/all_news_classes", async(req,res) => {
     }
     
   } catch(e){
-    res.status(500).json({message:"Something is wrong. Try again :("})
+    console.log(e)
+    res.status(500)
   }
 })
 
@@ -110,4 +111,52 @@ router.post("/create_content", async (req,res) => {
   }
 })
 
+router.post("/create_task", async(req,res) => {
+  try{
+      const create_task_content = req.body
+      const classId = req.headers.classid
+      const userid = req.headers.userid
+      console.log("AAAAAAAAA")
+      console.log(userid)
+      const newConetnt = await ClassesController.createTask(classId,create_task_content,userid,res)
+      res.status(201).json({ message: "Задание опубликовано!", id:newConetnt.insertId});
+  }catch(e){
+    res.status(500).json({ message: "Something is wrong. Try again" });
+  }
+})
+router.get("/get_task", async(req,res) => {
+  try{
+      const create_class = req.body
+      const classid = req.headers.classid
+      const userId = req.headers.userid
+      const classes_tasks = await ClassesController.findAllTasks(classid, res)
+      console.log(classes_tasks)
+      if(classes_tasks){
+        res.json(classes_tasks)
+      }else{
+        res.status(200)
+      }
+  }catch(e){
+    console.log(e)
+    res.status(500).json({ message: "Что то с заданиями... Попробуйте перезагрузить страницу!" });
+  }
+})
+
+router.get("/get_task_by_id", async(req,res) => {
+  try{
+    const taskid = req.headers.taskid
+    const task_by_id = await ClassesController.findTaskById(taskid)
+    console.log("AAAAAAAAAAAA")
+    console.log(task_by_id)
+    if(task_by_id){
+      res.json(task_by_id)
+    }else{
+      res.status(200)
+    }
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({ message: "Что то с заданиями... Попробуйте перезагрузить страницу!" });
+  }
+})
 module.exports = router;

@@ -31,8 +31,8 @@ function ConnectedClasses() {
     if(сonnectedClasses.length > 0){
         return(
         <div>
-        <div>
-            <h2 className = "mt-3 m-2">Подключенные классы:</h2>
+        <div className = "text-center">
+            <h2 className = "mt-3 m-2">Подключенные классы</h2>
         </div>
         <div className = "row row-cols-auto container">
             {сonnectedClasses.map((сonnectedС, index, key) => {

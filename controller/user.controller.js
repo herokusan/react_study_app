@@ -24,15 +24,19 @@ class UserController {
     getUserById = async (req, res, next) => {
         console.log(req)
         console.log("USERRRRRRRRRRRRRRRRRRR")
-        const user = await UserModel.findOne({ id: req });
-        if (!user) {
-            throw new HttpException(404, 'User not found');
+        try{
+            const user = await UserModel.findOne({ id: req });
+            if (!user) {
+                throw new HttpException(404, 'User not found');
+            }
+            console.log(user.name)
+    
+            // const { password, ...userWithoutPassword } = user;
+    
+            return user;
+        }catch(e){
+            console.log(e)
         }
-        console.log(user.name)
-
-        // const { password, ...userWithoutPassword } = user;
-
-        res.send(user);
     };
 
     getUserByuserName = async (req, res, next) => {
@@ -53,17 +57,21 @@ class UserController {
     };
 
     createUser = async (req, res, next) => {
-        this.checkValidation(req);
+        try{
+            this.checkValidation(req);
 
-        await this.hashPassword(req);
-
-        const result = await UserModel.create(req);
-
-        if (!result) {
-            throw res.status(500).json({ message: "Something is wrong. Try again" });
+            await this.hashPassword(req);
+    
+            const result = await UserModel.create(req);
+    
+            if (!result) {
+                throw res.status(500).json({ message: "Something is wrong. Try again" });
+            }
+    
+            return res.status(201)
+        }catch(e){
+            console.log(e)
         }
-
-        res.status(201).json({ message: "User created 😉" });
     };
 
     updateUser = async (req, res, next) => {

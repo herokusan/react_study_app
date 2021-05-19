@@ -31,8 +31,8 @@ function CretedClasses() {
     if(classes.length > 0){
         return(
             <div>
-            <div>
-                <h2 className = "mt-3 m-2">Ваши классы:</h2>
+            <div className = "text-center">
+                <h2 className = "mt-3 m-2">Ваши классы</h2>
             </div>
             <div className = "row row-cols-auto container">
                 {classes.map((classes, index, key) => {

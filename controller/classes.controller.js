@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator');
 const UserModel = require('../models/user.model');
 const UserController = require('../controller/user.controller');
 const ContentModel = require('../models/content.model')
+const TaskModel = require('../models/task.model')
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 
@@ -79,14 +80,48 @@ class ClassesController {
         res.status(201)
     }
 
+    findTaskById = async(tasksid) => {
+        try{
+        console.log("VVVVVVVVVVVVVVVVVVV")
+        console.log(tasksid)
+        const result = await TaskModel.findById(tasksid)
+        console.log("VVVVVVVVVVVVVVVVVVV")
+        console.log(result)
+        return result
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+    createTask = async(classId,create_task_content,userid,res) => {
+        try{
+            const result = await TaskModel.create(classId,create_task_content,userid)
+            console.log(create_task_content)
+            return result
+        }catch(e){
+            console.log(e)
+            throw res.status(500)
+        }
+    }
+
+    findAllTasks = async(classid) => {
+        try{
+            const result = await TaskModel.findAllTasks(classid)
+            return result
+        }catch(e){
+            console.log(e)
+            throw res.status(500)
+        }
+    }
+
     createClass = async (req,res, next, user_id) => {
         const result = await ClassesModel.create(req,user_id);
 
         if (!result) {
-            throw res.status(500).json({ message: "Something is wrong. Try again" });
+            throw res.status(500)
         }
 
-        res.status(201).send('Class was created!', result);
+        return result;
     };
 
     updateUser = async (req, res, next) => {

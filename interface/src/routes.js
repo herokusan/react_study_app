@@ -10,6 +10,7 @@ import AboutClass from "./components/classes/about_class"
 import ConnecteToClass from "./components/connect/connect_to_class"
 import Profile from "./components/user/profile"
 import ProfileEditor from "./components/user/profile_editor"
+import AboutTasks from './components/tasks/tasks'
 
 export const useRoutes = (isAuthenticated) => {
   if(isAuthenticated){
@@ -35,6 +36,9 @@ export const useRoutes = (isAuthenticated) => {
       </Route>
       <Route path = "/user_edit">
           <ProfileEditor></ProfileEditor>
+      </Route>
+      <Route path="/abouttask/:id">
+          <AboutTasks></AboutTasks>
       </Route>
       <Redirect to = "/"></Redirect>
     </Switch>
