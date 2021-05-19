@@ -21,6 +21,16 @@ function ClassesTasks() {
       title_task: "",
       tasks: ""
     });
+
+    const deleteTask = async () => {
+      try{
+        console.log({...form} )
+        // const deleted = await request("/api/classes/create_task", "POST", { ...form }, {classId:classId, userid:auth.user_id});
+      }catch(e){
+        console.log(e)
+      }
+    }
+
     const ClassesNewsFeched = useCallback(async () => {
         try {
           const feched = await request(`/api/classes/get_task`, "GET", null, {classId:classId});
@@ -45,6 +55,7 @@ function ClassesTasks() {
       const changeHandler = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value });
       };
+
 
       useEffect(() => {
         ClassesNewsFeched();
@@ -74,7 +85,7 @@ function ClassesTasks() {
                     <small>Название задания</small>
                     <input onChange = {changeHandler} name = "title_task" class="form-control" type="text" placeholder="Название" aria-label="default input example"/>
                     <small>Описание задания</small>
-                    <input onChange = {changeHandler} name = "tasks" class="form-control" type="text" placeholder="Описание задания" aria-label="default input example"/>
+                      <textarea onChange = {changeHandler}  class="form-control" placeholder="Напишите описание сдесь" id="floatingTextarea2"></textarea>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -90,15 +101,15 @@ function ClassesTasks() {
                 return (
                   <div className = "mt-3" key = {task.id}>
                     <div class="list-group">
-                      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                      <div class="list-group-item list-group-item-action m-3" aria-current="true">
                         <div className="d-flex w-100 justify-content-between">
                         <Link to = {`/abouttask/${task.id}`}><h5 className="mb-1">{task.title_task}</h5></Link>
-                          <small>{new Date(task.created_at).toLocaleDateString()} <button className = "btn btn-danger">Х</button> </small>
+                          <small>{new Date(task.created_at).toLocaleDateString()} <button onClick={deleteTask} className = "btn btn-danger">Х</button> </small>
                         </div>
                         <p className="mb-3">{task.tasks}</p>
                         <p className ="mb-1">Создатель:</p>
                         <small></small>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 );
