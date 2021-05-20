@@ -18,7 +18,21 @@ class ContentModel {
         console.log(result)
         return result
     }
-
+    sendTask = async(userid,taskid,file_task) => {
+        try{
+            const class_id = `SELECT class_id FROM ${this.tableName} WHERE id = ${taskid}`
+            const result_id = await query(class_id)
+            console.log(userid)
+            console.log(taskid)
+            console.log(file_task)
+            const sql = `INSERT INTO ${this.tableName}
+            (user_id,response,task_id, class_id) VALUES (?,?,?,?)`;
+            const result = await query(sql, [userid,file_task.send_file,taskid,result_id[0].class_id]);
+            return result;
+        }catch(e){
+            console.log(e)
+        }
+    }
 
     create = async (classId,create_task_content,userid) => {
         try{

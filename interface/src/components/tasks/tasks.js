@@ -18,32 +18,37 @@ function Tasks() {
     const taskId = useParams().id;
 
     const [form, setForm] = useState({
-      title_task: "",
-      tasks: ""
+      send_file: "",
     });
+    var teacher = false
     const ClassesNewsFeched = useCallback(async () => {
         try {
           const feched = await request(`/api/classes/get_task_by_id`, "GET", null, {taskId:taskId});
-          console.log(feched)
+          
+          if(feched[0].user_id == auth.user_id){
+            console.log("000000000000000000000")
+            console.log("000000000000000000000")
+            teacher = true
+          }
           setTasks(feched);
         } catch (e) {
           console.log(e)
         }
       }, [request, taskId]);
 
-    //   const CreateTasks = async () => {
-    //     try {
-    //       const data = await request("/api/classes/create_task", "POST", { ...form }, {classId:classId, userid:auth.user_id});
-    //       console.log(classId)
-    //       history.push(`/aboutclass/${classId}`);
-    //       messageSuccess(data.message);
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    //   };
-    //   const changeHandler = (event) => {
-    //     setForm({ ...form, [event.target.name]: event.target.value });
-    //   };
+      const SendTasks = async () => {
+        try {
+          const data = await request("/api/classes/send_task", "POST", { ...form }, {taskId:taskId,userid:auth.user_id});
+          console.log(taskId)
+          // history.push(`/aboutclass/${taskId}`);
+          messageSuccess(data.message);
+        } catch (e) {
+            console.log(e)
+        }
+      };
+      const changeHandler = (event) => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+      };
 
       useEffect(() => {
         ClassesNewsFeched();
@@ -53,13 +58,22 @@ function Tasks() {
         messageError(error);
         clearError();
       }, [error, messageError, clearError]);
+
+      if (loading) {
+        return <Loader></Loader>;
+      }
+      if(teacher){
+        return(
+          <h1>teacher!!!</h1>
+        )
+      }else{
     return(
         <div>
             <div className="row g-0 mt-3">
             <div className="col-sm-6 col-md-8">
             {tasks.map((task, index, key) => {
                     return (
-                        <div className = "text-center">
+                        <div className = "text-center" key = {key}>
                             <Link to = {`/aboutclass/${task.class_id}`} className = "btn btn-primary mt-3 mb-2 p-3">Вернуться в класс</Link>
                             <hr></hr>
                             <div className="accordion" id="accordionExample">
@@ -85,16 +99,16 @@ function Tasks() {
                     <h3>Прикрепить задание</h3>
                     <hr></hr>
                     <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1"/>
+                        <input onChange = {changeHandler} name = "send_file" type="file" class="form-control-file" id="exampleFormControlFile1"/>
                         <br></br>
-                        <button className = "btn btn-success mt-3">Отправить на проверку</button>
+                        <button  onClick={SendTasks} disabled={loading} className = "btn btn-success mt-3">Отправить на проверку</button>
                     </div>
                 </div>
             </div>
             </div>
         </div>
     )
-}
+}}
 
 
 export default Tasks

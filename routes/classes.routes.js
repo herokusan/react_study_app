@@ -159,4 +159,17 @@ router.get("/get_task_by_id", async(req,res) => {
     res.status(500).json({ message: "Что то с заданиями... Попробуйте перезагрузить страницу!" });
   }
 })
+
+router.post("/send_task", async(req,res) => {
+  try{
+      const file_task = req.body
+      const taskid = req.headers.taskid
+      const userid = req.headers.userid
+      const newConetnt = await ClassesController.sendTask(userid,taskid,file_task)
+      res.status(201).json({ message: "Задание отправлено на проверку!"});
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({ message: "Что то с отправкой задания... Попробуйте перезагрузить страницу!" });
+  }})
 module.exports = router;

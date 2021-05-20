@@ -80,6 +80,16 @@ class ClassesController {
         res.status(201)
     }
 
+    sendTask = async(userid,taskid,file_task) => {
+        try{
+            const result = await TaskModel.sendTask(userid,taskid,file_task)
+            return result
+        }catch(e){
+            console.log(e)
+            res.status(500)
+        }
+    }
+
     findTaskById = async(tasksid) => {
         try{
         console.log("VVVVVVVVVVVVVVVVVVV")
