@@ -52,9 +52,7 @@ router.get("/connected_classes", async(req,res) => {
 router.get("/all_news_classes", async(req,res) => {
   try{
     const classid = req.headers.classid
-    const classes_news = await ClassesController.findAllClassNews(classid, res)
-    console.log("LLLLLLLL")
-    console.log(classes_news)
+    let classes_news = await ClassesController.findAllClassNews(classid, res)
     if(classes_news){
       res.json(classes_news)
     }else{
@@ -146,8 +144,6 @@ router.get("/get_task_by_id", async(req,res) => {
   try{
     const taskid = req.headers.taskid
     const task_by_id = await ClassesController.findTaskById(taskid)
-    console.log("AAAAAAAAAAAA")
-    console.log(task_by_id)
     if(task_by_id){
       res.json(task_by_id)
     }else{

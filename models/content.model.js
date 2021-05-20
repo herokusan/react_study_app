@@ -57,7 +57,7 @@ class ContentModel {
         return result
     }
     findAllNews = async (clasid) => {
-        const sql = `SELECT * FROM ${this.tableName}
+        const sql = `SELECT * FROM ${this.tableName} JOIN classroom_users on classroom_users.id = classroom_content.user_id
         WHERE class_id = ${clasid}`;
         const result = await query(sql);
         return result;

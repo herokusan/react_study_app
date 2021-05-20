@@ -22,7 +22,7 @@ function ClassesNews() {
     });
     const ClassesNewsFeched = useCallback(async () => {
         try {
-          const feched = await request(`/api/classes/all_news_classes`, "GET", null, {classId:classId});
+          const feched = await request(`/api/classes/all_news_classes`, "GET", null, {classId:classId, userid:auth.user_id});
           console.log(feched)
           setNews(feched);
         } catch (e) {
@@ -65,15 +65,32 @@ function ClassesNews() {
             </div>
           </div>
           {news.map((n, index, key) => {
+            if(n.user_id == auth.user_id){
+              return (
+                <div className = "mt-3" key = {n.id}>
+                  <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{n.content}</h5>
+                        <small>{new Date(n.created_at).toLocaleDateString()} <button className = "btn btn-danger">Х</button> </small>
+                      </div>
+                      <p class="mb-1">Создатель: {n.name + " " + n.surname}</p>
+                      <small></small>
+                    </a>
+                  </div>
+                </div>)
+            }else{
+
+            }
                 return (
                 <div className = "mt-3" key = {n.id}>
                   <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                       <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{n.content}</h5>
-                        <small>3 days ago <button className = "btn btn-danger">Х</button> </small>
+                        <small>{new Date(n.created_at).toLocaleDateString()} </small>
                       </div>
-                      <p class="mb-1">Создатель:</p>
+                      <p class="mb-1">Создатель: {n.name + " " + n.surname}</p>
                       <small></small>
                     </a>
                   </div>

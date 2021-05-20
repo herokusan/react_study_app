@@ -69,6 +69,7 @@ function ClassesTasks() {
         <div>
           <div className = "text-center">
           {/* <!-- Button trigger modal --> */}
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Добавить задание
             </button>
@@ -98,9 +99,10 @@ function ClassesTasks() {
             <div>
               <h3>Задания класса</h3>
               {tasks.map((task, index, key) => {
-                return (
-                  <div className = "mt-3" key = {task.id}>
-                    <div class="list-group">
+                if(task.user_id == auth.user_id){
+                  return(
+                    <div className = "mt-3" key = {task.id}>
+                    <div class="list-group m-5">
                       <div class="list-group-item list-group-item-action m-3" aria-current="true">
                         <div className="d-flex w-100 justify-content-between">
                         <Link to = {`/abouttask/${task.id}`}><h5 className="mb-1">{task.title_task}</h5></Link>
@@ -112,7 +114,24 @@ function ClassesTasks() {
                       </div>
                     </div>
                   </div>
-                );
+                  )
+                }else{
+                  return (
+                    <div className = "mt-3" key = {task.id}>
+                      <div class="list-group m-3">
+                        <div class="list-group-item list-group-item-action" aria-current="true">
+                          <div className="d-flex w-100 justify-content-between">
+                          <Link to = {`/abouttask/${task.id}`}><h5 className="mb-1">{task.title_task}</h5></Link>
+                            <small>{new Date(task.created_at).toLocaleDateString()}</small>
+                          </div>
+                          <p className="mb-3">{task.tasks}</p>
+                          <p className ="mb-1">Создатель:</p>
+                          <small></small>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
             })}
             </div>
         </div>
