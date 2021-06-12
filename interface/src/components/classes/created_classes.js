@@ -43,7 +43,8 @@ function CretedClasses() {
                                 <Link to = {`/aboutclass/${classes.id}`}><h5 className="card-title">{classes.class_name}</h5></Link>
                                 <p className="card-text">Предмет: {classes.subject}</p>
                                 <p className="card-text">
-                                    Создатель <b>{classes.user_created}</b>
+                                <small><button className = "btn btn-danger">Удалить класс</button></small>
+                                    {/* Создатель: <b>{classes.name + " " + classes.surname}</b> */}
                                 </p>
                             </div>
                         </div>

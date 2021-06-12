@@ -56,6 +56,11 @@ class ClassesController {
         res.send(userWithoutPassword);
     };
 
+    findUserConnect = async(clasid,res) => {
+        const result = await ClassesModel.findUserConnect(clasid);
+        return result
+    }
+
     getCurrentUser = async (req, res, next) => {
         const { password, ...userWithoutPassword } = req.currentUser;
 

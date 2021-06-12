@@ -42,6 +42,7 @@ function Registration() {
         <div className = "container mt-5 text-center shadow-lg p-3 mb-5 bg-white rounded">
             <div className = "mb-5">
                 <h3>Регистрационная форма</h3>
+                <hr></hr>
             </div>
                 <div className="mb-3 text-center">
                     <label className="form-label">Email</label>
@@ -60,10 +61,10 @@ function Registration() {
                     <label className="form-label">Фамилия</label>
                     <input onChange = {changeHandler} placeholder = "Фамилия" name = "surname" className="form-control"></input>
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label className="form-label">Пол</label>
                     <input onChange = {changeHandler} placeholder = "Пол" name = "sex" className="form-control"></input>
-                </div>
+                </div> */}
                 <div className="mb-3">
                     <label className="form-label">Номер телефона</label>
                     <input onChange = {changeHandler} placeholder = "Номер телефона"  name = "phone" className="form-control"></input>

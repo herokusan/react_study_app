@@ -74,7 +74,7 @@ function ClassesNews() {
                         <h5 class="mb-1">{n.content}</h5>
                         <small>{new Date(n.created_at).toLocaleDateString()} <button className = "btn btn-danger">Х</button> </small>
                       </div>
-                      <p class="mb-1">Создатель: {n.name + " " + n.surname}</p>
+                      {/* <p class="mb-1">Создатель: {n.name + " " + n.surname}</p> */}
                       <small></small>
                     </a>
                   </div>
@@ -90,7 +90,7 @@ function ClassesNews() {
                         <h5 class="mb-1">{n.content}</h5>
                         <small>{new Date(n.created_at).toLocaleDateString()} </small>
                       </div>
-                      <p class="mb-1">Создатель: {n.name + " " + n.surname}</p>
+                      {/* <p class="mb-1">Создатель: {n.name + " " + n.surname}</p> */}
                       <small></small>
                     </a>
                   </div>

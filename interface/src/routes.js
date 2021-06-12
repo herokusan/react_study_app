@@ -20,7 +20,7 @@ export const useRoutes = (isAuthenticated) => {
         <Home></Home>
       </Route>
       <Route path = "/classses">
-        <Classes></Classes>
+        <CreateClasses></CreateClasses>
       </Route>
       <Route path = "/create_classes">
         <CreateClasses></CreateClasses>

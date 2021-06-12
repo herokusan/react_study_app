@@ -24,12 +24,6 @@ function Tasks() {
     const ClassesNewsFeched = useCallback(async () => {
         try {
           const feched = await request(`/api/classes/get_task_by_id`, "GET", null, {taskId:taskId});
-          
-          if(feched[0].user_id == auth.user_id){
-            console.log("000000000000000000000")
-            console.log("000000000000000000000")
-            teacher = true
-          }
           setTasks(feched);
         } catch (e) {
           console.log(e)
@@ -69,43 +63,39 @@ function Tasks() {
       }else{
     return(
         <div>
-            <div className="row g-0 mt-3">
-            <div className="col-sm-6 col-md-8">
             {tasks.map((task, index, key) => {
                     return (
                         <div className = "text-center" key = {key}>
                             <Link to = {`/aboutclass/${task.class_id}`} className = "btn btn-primary mt-3 mb-2 p-3">Вернуться в класс</Link>
                             <hr></hr>
-                            <div className="accordion" id="accordionExample">
-                                <div className="accordion-item">
-                                    <h2 className="accordion-header" id="headingOne">
-                                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Задание: <b>{task.title_task}</b>
-                                    </button>
-                                    </h2>
-                                    <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div className="accordion-body">
-                                        <strong>Описание задания: </strong>{task.tasks}
-                                    </div>
-                                    </div>
+                            <div class="accordion" id="accordionExample">
+                              <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  <small>Задание: </small> <b>{task.title_task}</b>
+                                </button>
+                              </h2>
+                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body">
+                                    Описание: <strong>{task.tasks}</strong>
+                                  </div>
+                                  <div>
                                 </div>
-                        </div>
+                              </div>
+                              </div>
+                            </div>
+                          <div className="text-center mt-5">
+                              <h3>Решение</h3>
+                              <div class="form-group mt-3 mb-5">
+                                  <input onChange = {changeHandler} name = "send_file" type="file" class="form-control-file" id="exampleFormControlFile1"/>
+                                  <br></br>
+                                  <button  onClick={SendTasks} disabled={loading} className = "btn btn-success mt-3">Отправить на проверку</button>
+                              </div>
+                          </div>
+                          <hr></hr>
                         </div>
                       );
             })}
-            </div>
-            <div className ="col-6 col-md-4">
-                <div className="vl text-center">
-                    <h3>Прикрепить задание</h3>
-                    <hr></hr>
-                    <div class="form-group">
-                        <input onChange = {changeHandler} name = "send_file" type="file" class="form-control-file" id="exampleFormControlFile1"/>
-                        <br></br>
-                        <button  onClick={SendTasks} disabled={loading} className = "btn btn-success mt-3">Отправить на проверку</button>
-                    </div>
-                </div>
-            </div>
-            </div>
         </div>
     )
 }}

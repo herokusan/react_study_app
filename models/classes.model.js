@@ -21,7 +21,7 @@ class ClassesModel {
     findById = async(params) => {
         const sql = `SELECT * FROM ${this.tableName} WHERE id = ${params.id}`
         const result = await query(sql);
-        return result[0]
+        return result
     }
     connectToClass = async(res,code,user_id) => {
         const find_class = await query(`SELECT * FROM ${this.tableName} WHERE access_code = ${code.access_code}`)
@@ -51,13 +51,29 @@ class ClassesModel {
 
     findUserConnectedClasses = async (params) => {
         const {user_id} = multipleColumnSet(params)
-        const sql = `SELECT * FROM ${this.tableName} WHERE JSON_CONTAINS(users, "${params.user_id}")`
+        const sql = `SELECT * FROM ${this.tableName}
+        WHERE JSON_CONTAINS(users, "${params.user_id}")`
         const result = await query(sql)
         return result
     }
+
+
+    findUserConnect = async(classid) => {
+        try{
+            const sql = `SELECT users FROM ${this.tableName} 
+            WHERE ${this.tableName}.id = ${classid}`;
+            const result = await query(sql);
+            return result
+        }catch(e){
+            console.log(e)
+        }
+       
+        
+    }
+
     findByUserCreated = async (params) => {
         const { columnSet, values } = multipleColumnSet(params)
-        const sql = `SELECT * FROM ${this.tableName}
+        const sql = `SELECT * FROM ${this.tableName} 
         WHERE ${columnSet}`;
         const result = await query(sql, [...values]);
         return result;

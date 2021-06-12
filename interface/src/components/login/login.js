@@ -59,8 +59,12 @@ function Login() {
                 </div>
               </div>
               <div className = "shadow-lg p-3 mb-5 bg-white rounded">
-                <div className="form-group mt-3">
-                  <label>Ваш email</label>
+              <div className = "mb-3">
+                  <h1>Вход в систему</h1>
+                  <hr></hr>
+                </div>
+                <div className="form-group mt-3 mb-3">
+                  <label>Ваш email:</label>
                   <input
                     onChange = {changeHandler}
                     type="email"
@@ -84,7 +88,7 @@ function Login() {
                   ></input>
                 </div>
                 <div className="form-check"></div>
-                <button onClick = {loginHandelr} className="btn btn-warning" type="submit" value="Вход">Вход</button>
+                <button onClick = {loginHandelr} className="btn btn-warning" type="submit" value="Вход">Войти</button>
                 <hr></hr>
                 <label className="mt-2">Нету аккаунта?</label>
                 <br/>

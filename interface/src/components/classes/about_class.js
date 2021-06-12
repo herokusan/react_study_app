@@ -23,7 +23,10 @@ function AboutClass() {
     const ClassesFeched = useCallback(async () => {
         try {
           const feched = await request(`/api/classes/about_classes/${classId}`, "GET", null);
-          setClasses(feched);
+          console.log("AAAAAAAAAAAAAAA")
+          console.log("AAAAAAAAAAAAAAA")
+          console.log(feched)
+          setClasses(feched[0]);
         } catch (e) {}
       }, [request, classId]);
 
@@ -44,7 +47,7 @@ function AboutClass() {
                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Задания</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Ученики</button>
+                {/* <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Ученики</button> */}
             </li>
             </ul>
             <div className = "text-center text-dark p-3">

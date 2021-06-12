@@ -168,4 +168,22 @@ router.post("/send_task", async(req,res) => {
     console.log(e)
     res.status(500).json({ message: "Что то с отправкой задания... Попробуйте перезагрузить страницу!" });
   }})
+
+router.get("/users",async(req,res) => {
+  try{
+    const classid = req.headers.classid
+    console.log("AAAAAAAAAAAAAAAAAA")
+    console.log(req.headers)
+    const users = await ClassesController.findUserConnect(classid,res)
+    if(users){
+      res.json(users)
+    }else{
+      res.status(200)
+    }
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({ message: "Что то с учениками... Попробуйте перезагрузить страницу!" });
+  }
+})
 module.exports = router;

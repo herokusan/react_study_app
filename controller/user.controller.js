@@ -22,8 +22,6 @@ class UserController {
     };
 
     getUserById = async (req, res, next) => {
-        console.log(req)
-        console.log("USERRRRRRRRRRRRRRRRRRR")
         try{
             const user = await UserModel.findOne({ id: req });
             if (!user) {
@@ -120,7 +118,7 @@ class UserController {
             const isMatch = await bcrypt.compare(pass, user.password);
     
             if (!isMatch) {
-                throw new HttpException(401, 'Incorrect password!');
+                throw res.status(500).json({ message: "Не верные данные!" });
             }
     
             // user matched!

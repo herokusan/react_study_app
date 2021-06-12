@@ -84,9 +84,9 @@ function ClassesTasks() {
                   </div>
                   <div class="modal-body">
                     <small>Название задания</small>
-                    <input onChange = {changeHandler} name = "title_task" class="form-control" type="text" placeholder="Название" aria-label="default input example"/>
+                    <input onChange = {changeHandler} required name = "title_task" class="form-control" type="text" placeholder="Название" aria-label="default input example"/>
                     <small>Описание задания</small>
-                      <textarea onChange = {changeHandler}  class="form-control" placeholder="Напишите описание сдесь" id="floatingTextarea2"></textarea>
+                      <textarea onChange = {changeHandler} required name = "tasks"  class="form-control" placeholder="Напишите описание сдесь" id="floatingTextarea2"></textarea>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -101,35 +101,41 @@ function ClassesTasks() {
               {tasks.map((task, index, key) => {
                 if(task.user_id == auth.user_id){
                   return(
-                    <div className = "mt-3" key = {task.id}>
-                    <div class="list-group m-5">
-                      <div class="list-group-item list-group-item-action m-3" aria-current="true">
-                        <div className="d-flex w-100 justify-content-between">
-                        <Link to = {`/abouttask/${task.id}`}><h5 className="mb-1">{task.title_task}</h5></Link>
+                     <Link to = {`/abouttask/${task.id}`}>
+                      <div className = "mt-3" key = {task.id}>
+                        <div class="list-group m-3">
+                          <div class="list-group-item list-group-item-action" aria-current="true">
+                            <div className="d-flex w-100 justify-content-between">
+                            
+                              <h5 className="mb-1">{task.tasks}</h5>
                           <small>{new Date(task.created_at).toLocaleDateString()} <button onClick={deleteTask} className = "btn btn-danger">Х</button> </small>
                         </div>
-                        <p className="mb-3">{task.tasks}</p>
-                        <p className ="mb-1">Создатель:</p>
+                        <p className="mb-3">{task.title_task}</p>
+                        {/* <p className ="mb-1">Создатель:</p> */}
                         <small></small>
                       </div>
                     </div>
                   </div>
+                    </Link>
                   )
                 }else{
                   return (
+                    <Link to = {`/abouttask/${task.id}`}>
                     <div className = "mt-3" key = {task.id}>
                       <div class="list-group m-3">
                         <div class="list-group-item list-group-item-action" aria-current="true">
                           <div className="d-flex w-100 justify-content-between">
-                          <Link to = {`/abouttask/${task.id}`}><h5 className="mb-1">{task.title_task}</h5></Link>
+                         <h5 className="mb-1"> {task.tasks}</h5>
+                        
                             <small>{new Date(task.created_at).toLocaleDateString()}</small>
                           </div>
-                          <p className="mb-3">{task.tasks}</p>
-                          <p className ="mb-1">Создатель:</p>
+                          <p className="mb-3">{task.title_task}</p>
+                          {/* <p className ="mb-1">Создатель:</p> */}
                           <small></small>
                         </div>
                       </div>
                     </div>
+                    </Link>
                   );
                 }
             })}

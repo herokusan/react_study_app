@@ -29,13 +29,13 @@ function Profile() {
     }, [userFech]);
     return(
         <div className = "container mt-3">
-            <Link to = "/user_edit" className = "btn btn-light">Редактировать</Link>
+            <Link to = "/user_edit" className = "btn btn-success">Редактировать</Link>
             <div className = "mt-3">
-                <p>Имя: {user.name}</p>
-                <p>Фамилия: {user.surname}</p>
-                <p>Город: {user.city}</p>
-                <p>Email: {user.email}</p>
-                <p>Возраст: {user.age}</p>
+                <p><b>Имя:</b> {user.name}</p>
+                <p><b>Фамилия:</b> {user.surname}</p>
+                <p><b>Город:</b> {user.city}</p>
+                <p><b>Электронная почта:</b> {user.email}</p>
+                <p><b>Возраст:</b> {user.age}</p>
             </div>
             <hr></hr>
         </div>

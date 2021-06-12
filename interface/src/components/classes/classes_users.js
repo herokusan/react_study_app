@@ -9,7 +9,7 @@ import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 
 function ClassesUsers() {
 
-    const [classes, setClasses] = useState([]);
+    const [users, setUsers] = useState([]);
     const { loading, request } = useHttp();
     const auth = useContext(AuthContext);
     const messageError = useMessageError();
@@ -17,23 +17,25 @@ function ClassesUsers() {
     const classId = useParams().id;
     console.log(classId)
 
-    const ClassesFeched = useCallback(async () => {
-        try {
-          const feched = await request(`/api/classes/about_classes/${classId}`, "GET", null);
-          setClasses(feched);
-        } catch (e) {}
-      }, [request, classId]);
-
+    const UsesrsFeched = useCallback(async () => {
+      try{
+        const fech = await request("/api/classes/users", "GET", null, {classid:classId});
+        console.log(fech)
+        setUsers(fech)
+      }catch(e){
+          console.log(e)
+      }
+    },[request])
       useEffect(() => {
-        ClassesFeched();
-      }, [ClassesFeched]);
+        UsesrsFeched();
+      }, [UsesrsFeched]);
   
     if (loading) {
       return <Loader></Loader>;
     }
     return(
         <div>
-           <h1>Учасники Класса!!!!!!!!!!!!</h1>
+
         </div>
     )
 }

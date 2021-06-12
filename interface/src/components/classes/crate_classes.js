@@ -45,9 +45,12 @@ function CreateClasses() {
         <div className = "contaier m-5 text-center">
           <div className = "shadow mb-5 mt-5 p-5">
             <h2>Создание класса</h2>
-            <input onChange = {changeHandler} className = "m-3" name = "class_name" type = "text" placeholder ="Имя класса"></input>
+            <hr></hr>
+            <label>Имя нового класа</label>
+            <input onChange = {changeHandler} className = "mb-3 form-control" name = "class_name" type = "text" placeholder ="Имя класса"></input>
             <br></br>
-            <input onChange = {changeHandler} className = "m-3" type = "text" name = "subject" placeholder ="Предмет класса"></input>
+            <label>Предмет нового класа</label>
+            <input onChange = {changeHandler} className = "mb-3 form-control" type = "text" name = "subject" placeholder ="Предмет класса"></input>
             <br></br>
             <button className = "mt-3 btn btn-success" onClick={createClassesHandler} disabled={loading} >Создать!</button>
           </div>
