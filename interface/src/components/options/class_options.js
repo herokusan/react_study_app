@@ -17,6 +17,17 @@ function ClassOptions() {
     const classId = useParams().id;
     console.log(classId)
 
+    const ClassesFeched = useCallback(async () => {
+        try {
+          const feched = await request(`/api/classes/about_classes/${classId}`, "GET", null);
+          console.log(feched)
+          setClasses(feched[0]);
+        } catch (e) {}
+      }, [request, classId]);
+
+      useEffect(() => {
+        ClassesFeched();
+      }, [ClassesFeched]);
 
     const DeleteClass = async () => {
         try {
@@ -45,25 +56,38 @@ function ClassOptions() {
     if (loading) {
       return <Loader></Loader>;
     }
-    return(
-        <div>
-            <div className = "text-center container">
-            <h3>Базовые настройки</h3>
-                <input class="form-control form-control-lg mt-4" type="text" placeholder="Изменение названия класса"></input>
-                <input class="form-control form-control-lg mt-3" type="text" placeholder="Изменение предмета класса"></input>
-                <input class="form-control form-control-lg mt-3" type="text" placeholder="Изменение кода доступа класса"></input>
-                {/* <input class="form-control form-control-lg mt-3" type="text" placeholder="Изменение названия класса"></input> */}
-                <button className = "btn btn-success mt-3">Сохранить изменения</button>
-                <hr></hr>
+    if(auth.user_id === classes.user_created){
+        return(
+            <div>
+                <div className = "text-center container">
+                <h3>Базовые настройки</h3>
+                    <input class="form-control form-control-lg mt-4" type="text" placeholder="Изменение названия класса"></input>
+                    <input class="form-control form-control-lg mt-3" type="text" placeholder="Изменение предмета класса"></input>
+                    <input class="form-control form-control-lg mt-3" type="text" placeholder="Изменение кода доступа класса"></input>
+                    {/* <input class="form-control form-control-lg mt-3" type="text" placeholder="Изменение названия класса"></input> */}
+                    <button className = "btn btn-success mt-3">Сохранить изменения</button>
+                    <hr></hr>
+                </div>
+                <div className = "border text-center">
+                    <h3 className = "mt-3">Опасные настройки</h3>
+                    <small><button className = "btn btn-danger mb-3 " onClick = {DeleteClass}>Удалить класс</button></small>
+                    <br></br>
+                    <small><button className = "btn btn-danger mb-3 " onClick = {ChangeClass}>Ограничить доступ к классу</button></small>
+                </div>
             </div>
-            <div className = "border text-center">
-                <h3 className = "mt-3">Опасные настройки</h3>
-                <small><button className = "btn btn-danger mb-3 " onClick = {DeleteClass}>Удалить класс</button></small>
-                <br></br>
-                <small><button className = "btn btn-danger mb-3 " onClick = {ChangeClass}>Ограничить доступ к классу</button></small>
+        )
+    }else{
+        return(
+            <div className = "container text-center">
+                    <div className = "border text-center">
+                    <h3 className = "mt-3">Опасные настройки</h3>
+                    <small><button className = "btn btn-danger mb-3 " onClick = {DeleteClass}>Покинуть класс</button></small>
+                    <br></br>
+                    {/* <small><button className = "btn btn-danger mb-3 " onClick = {ChangeClass}>Ограничить доступ к классу</button></small> */}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 

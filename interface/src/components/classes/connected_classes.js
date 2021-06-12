@@ -43,9 +43,9 @@ function ConnectedClasses() {
                             <Link to = {`/aboutclass/${сonnectedС.id}`}><h5 className="card-title">{сonnectedС.class_name}</h5></Link>
                             <p className="card-text">Предмет: {сonnectedС.subject}</p>
                             <p className="card-text">
-                                {/* Создатель: <b>{сonnectedС.name + " " + сonnectedС.surname}</b> */}
+                                Код доступа в класс: <b>{сonnectedС.access_code}</b>
                             </p>
-                            <small><button className = "btn btn-danger">Покинуть класс</button></small>
+                            {/* <small><button className = "btn btn-danger">Покинуть класс</button></small> */}
                         </div>
                     </div>
                 </div>
