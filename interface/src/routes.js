@@ -5,6 +5,8 @@ import Login from "./components/login/login.js";
 import Registration from "./components/registration/registration";
 import Home from "./components/home/home"
 import Classes from "./components/classes/classes"
+import Forgot from "./components/login/forgot"
+import Test from "./components/test/test"
 import CreateClasses from "./components/classes/crate_classes"
 import AboutClass from "./components/classes/about_class"
 import ConnecteToClass from "./components/connect/connect_to_class"
@@ -51,6 +53,12 @@ export const useRoutes = (isAuthenticated) => {
       </Route>
       <Route path="/registration" exact>
         <Registration></Registration>
+      </Route>
+      <Route path ="/test">
+        <Test></Test>
+      </Route>
+      <Route path = "/forgot">
+        <Forgot></Forgot>
       </Route>
       <Redirect to="/"></Redirect>
     </Switch>
