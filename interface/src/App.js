@@ -13,7 +13,7 @@ function App() {
   const isAuthenticated = !!token;
   const routes = useRoutes(isAuthenticated);
   return (
-    <div>
+    <div className = "main-wrapper">
     <AuthContext.Provider
     value={{
       token,

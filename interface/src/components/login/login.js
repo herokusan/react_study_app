@@ -3,6 +3,7 @@ import { useHttp } from "../../Hooks/http.hook.js";
 import { AuthContext } from "../../Context/auth.context";
 import { Link } from "react-router-dom";
 import { Loader } from "../items/loader";
+import './login.css'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -80,7 +81,7 @@ function Login() {
 
 
   return (
-    <div>
+    <div className = "wrapper">
        <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>

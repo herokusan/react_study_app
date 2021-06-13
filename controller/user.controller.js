@@ -54,6 +54,16 @@ class UserController {
         res.send(userWithoutPassword);
     };
 
+    findUserByEmail = async (email,res) => {
+        const result = await UserModel.findUserByEmail(email)
+        if(result){
+            console.log(">>>>>>>>>>>>>>")
+            return result
+        }else{
+            return res.status(500)
+        }
+    }
+
     createUser = async (req, res, next) => {
         try{
             this.checkValidation(req);
@@ -144,7 +154,6 @@ class UserController {
             throw new HttpException(400, 'Validation faild', errors);
         }
     }
-
     // hash password if it exists
     hashPassword = async (req) => {
         console.log(req.password)

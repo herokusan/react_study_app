@@ -29,7 +29,13 @@ class UserModel {
         // return back the first row (user)
         return result[0];
     }
-
+    findUserByEmail = async (email) => {
+        const sql = `SELECT * FROM ${this.tableName} WHERE email = "${email}"`
+        const result = await query(sql)
+        console.log("TRTRTRTRT")
+        console.log(result)
+        return result
+    }
     create = async ({name, surname, password, phone,email, sex }) => {
         const sql = `INSERT INTO ${this.tableName}
         (name,surname,password,phone,email,sex) VALUES (?,?,?,?,?,?)`;

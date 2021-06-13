@@ -53,4 +53,17 @@ router.post('/edit_profile', async(req,res) => {
   }
 })
 
+router.post('/forgot', async(req,res) => {
+  try{
+    const email_user  = await userController.findUserByEmail(req.body.email, res)
+    if(email_user.length > 0){
+
+    }else{
+      res.status(500).json({ message: "Пользователь с таким email не зарегестрирован" });
+    }
+  }catch(e){
+    console.log(e)
+  }
+})
+
 module.exports = router;

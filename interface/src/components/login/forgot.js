@@ -48,7 +48,6 @@ function Forgot() {
   const classes = useStyles();
     const [form, setForm] = useState({
         email: "",
-        password: "",
       });
 
       useEffect(() => {
@@ -60,11 +59,11 @@ function Forgot() {
         setForm({ ...form, [event.target.name]: event.target.value });
       };
     
-      const loginHandelr = async () => {
+      const ForgotHandelr = async () => {
         try {
-          const data = await request("/api/auth/login", "POST", { ...form });
-          auth.login(data.token, data.id);
-          messageSuccess(" " + data.name + " 😃 ");
+          const data = await request("/api/auth/forgot", "POST", { ...form });
+          console.log('ZZZZZZZZZZZZZZZ')
+          console.log(data)
         } catch (e) {
             console.log(e)
             messageError(e);
@@ -114,7 +113,7 @@ function Forgot() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick = {loginHandelr}
+            onClick = {ForgotHandelr}
           >
             Отправить
           </Button>
