@@ -7,6 +7,7 @@ import Home from "./components/home/home"
 import Classes from "./components/classes/classes"
 import Forgot from "./components/login/forgot"
 import Test from "./components/test/test"
+import BuyingPage from "./components/pro/buying_page"
 import CreateClasses from "./components/classes/crate_classes"
 import AboutClass from "./components/classes/about_class"
 import ConnecteToClass from "./components/connect/connect_to_class"
@@ -41,6 +42,9 @@ export const useRoutes = (isAuthenticated) => {
       </Route>
       <Route path="/abouttask/:id">
           <AboutTasks></AboutTasks>
+      </Route>
+      <Route path = "/buying">
+        <BuyingPage></BuyingPage>
       </Route>
       <Redirect to = "/"></Redirect>
     </Switch>

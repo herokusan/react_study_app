@@ -38,6 +38,11 @@ function Navbar() {
                   Профиль <span className="sr-only"></span>
                 </Link>
               </li>
+              <li class="nav-item">
+              <Link className="nav-link" to="/buying">
+                  Перейти в PRO <span className="sr-only"></span>
+                </Link>
+              </li>
             </ul>
             <Link
                   to="/"

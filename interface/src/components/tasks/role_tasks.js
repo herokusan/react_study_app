@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Loader } from "../items/loader";
 import { useHistory } from "react-router-dom";
-import RoleTasks from "../tasks/role_tasks"
 import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 import './tasks.css';
 
-function Tasks() {
+function RoleTasks() {
     const history = useHistory();
     const [tasks, setTasks] = useState([]);
     const { loading, error, request, clearError } = useHttp();
@@ -65,34 +64,30 @@ function Tasks() {
     return(
         <div>
             {tasks.map((task, index, key) => {
-                    return (
-                        <div className = "text-center container" key = {key}>
-                            <Link to = {`/aboutclass/${task.class_id}`} className = "btn btn-primary mt-3 mb-2 p-3">Вернуться в класс</Link>
-                            <hr></hr>
-                            <div class="accordion" id="accordionExample">
-                              <div class="accordion-item">
-                              <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                  <small>Задание: </small> <b>{task.title_task}</b>
-                                </button>
-                              </h2>
-                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                  <div class="accordion-body">
-                                    Описание: <strong>{task.tasks}</strong>
-                                  </div>
-                                  <div>
-                                </div>
-                              </div>
-                              </div>
-                            </div>
-                            <RoleTasks></RoleTasks>
-                          <hr></hr>
+                if(task.user_id === auth.user_id){
+                    return(
+                        <div className = "contaniner mt-3">
+                            <h1>Оценка</h1>
                         </div>
-                      );
+                    )
+                }else{
+                    return (
+                        <div className = "text-center" key = {key}>
+                          <div className="text-center mt-5">
+                              <h3>Решение</h3>
+                              <div class="form-group mt-3 mb-5">
+                                  <input onChange = {changeHandler} name = "send_file" type="file" class="form-control-file" id="exampleFormControlFile1"/>
+                                  <br></br>
+                                  <button  onClick={SendTasks} disabled={loading} className = "btn btn-success mt-3">Отправить на проверку</button>
+                              </div>
+                          </div>
+                        </div>
+                    );
+                }
             })}
         </div>
     )
 }}
 
 
-export default Tasks
+export default RoleTasks

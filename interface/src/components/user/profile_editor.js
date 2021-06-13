@@ -64,8 +64,9 @@ function ProfileEditor() {
         <div className = "container mt-3">
             <div className = "mt-3 text-center">
                 <label>Имя</label><input 
-                onChange = {e => this.setState({ text: e.target.value })} 
-                value = {user.name}
+                type ="text" 
+                // value = {user.name}
+                onChange = {changeHandler}
                 className = "form-control" 
                 placeholder = "Имя"
                 name = "name"></input>
