@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon app.js",
     "migration": "node Migration.js up",
+    "npminstall": "npm install --prefix interface",
     "interface": "npm start --prefix interface",
-    "start": "concurrently \"npm run migration\" \" npm run server\"  \"npm run interface \""
+    "start": "concurrently \"npm run npminstall\"  \"npm run migration\" \" npm run server\"  \"npm run interface \""
   },
   "repository": {
     "type": "git",
