@@ -186,4 +186,20 @@ router.get("/users",async(req,res) => {
     res.status(500).json({ message: "Что то с учениками... Попробуйте перезагрузить страницу!" });
   }
 })
+
+router.get("/get_student_work",async(req,res) => {
+  try{
+    const classid = req.headers.classid
+    const users = await ClassesController.findUserConnect(classid,res)
+    if(users){
+      res.json(users)
+    }else{
+      res.status(200)
+    }
+
+  }catch(e){
+    console.log(e)
+    res.status(500).json({ message: "Что то с учениками... Попробуйте перезагрузить страницу!" });
+  }
+})
 module.exports = router;

@@ -4,14 +4,14 @@ import { AuthContext } from "../../Context/auth.context";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Loader } from "../items/loader";
-import StudentTasks from "./student_tasks"
 import { useHistory } from "react-router-dom";
 import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 import './tasks.css';
 
-function RoleTasks() {
+function StudentTasks() {
     const history = useHistory();
     const [tasks, setTasks] = useState([]);
+    const [works, setWorks] = useState([]);
     const { loading, error, request, clearError } = useHttp();
     const auth = useContext(AuthContext);
     const messageError = useMessageError();
@@ -21,11 +21,20 @@ function RoleTasks() {
     const [form, setForm] = useState({
       send_file: "",
     });
-    var teacher = false
+
     const ClassesNewsFeched = useCallback(async () => {
         try {
           const feched = await request(`/api/classes/get_task_by_id`, "GET", null, {taskId:taskId});
           setTasks(feched);
+        } catch (e) {
+          console.log(e)
+        }
+      }, [request, taskId]);
+
+      const UserWorks = useCallback(async () => {
+        try {
+          const feched = await request(`/api/classes/get_student_work`, "GET", null, {taskId:taskId});
+          setWorks(feched);
         } catch (e) {
           console.log(e)
         }
@@ -56,30 +65,20 @@ function RoleTasks() {
 
       if (loading) {
         return <Loader></Loader>;
-      }
-      if(teacher){
-        return(
-          <h1>teacher!!!</h1>
-        )
-      }else{
+    }
     return(
         <div>
-            {tasks.map((task, index, key) => {
-                if(task.user_id === auth.user_id){
-                    return(
-                        <div className = "contaniner mt-3">
-                            <h1>Оценка</h1>
-                        </div>
-                    )
-                }else{
-                  return(
-                    <StudentTasks></StudentTasks>
-                  )
-                }
-            })}
-        </div>
+                <div className="text-center mt-5">
+                    <h3>Решение</h3>
+                    <div class="form-group mt-3 mb-5">
+                        <input onChange = {changeHandler} name = "send_file" type="file" class="form-control-file" id="exampleFormControlFile1"/>
+                        <br></br>
+                        <button  onClick={SendTasks} disabled={loading} className = "btn btn-success mt-3">Отправить на проверку</button>
+                    </div>
+            </div>
+            </div>
     )
-}}
+}
 
 
-export default RoleTasks
+export default StudentTasks

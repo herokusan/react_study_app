@@ -5,11 +5,10 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node App.js",
     "server": "nodemon app.js",
     "migration": "node Migration.js up",
     "interface": "npm start --prefix interface",
-    "dev": "concurrently \"npm run migration\" \" npm run server\"  \"npm run interface \""
+    "start": "concurrently \"npm run migration\" \" npm run server\"  \"npm run interface \""
   },
   "repository": {
     "type": "git",
