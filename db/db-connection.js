@@ -4,12 +4,19 @@ const mysql2 = require('mysql2');
 
 class DBConnection {
     constructor() {
+        // this.db = mysql2.createPool({
+        //     host: "localhost",
+        //     user: "root",
+        //     password: "lytvynskyi",
+        //     database: "distance_learning"
+        // });
+
         this.db = mysql2.createPool({
-            host: "localhost",
-            user: "root",
-            password: "lytvynskyi",
-            database: "distance_learning"
-        });
+            host: "remotemysql.com",
+            user: "asGr29M9g5",
+            password: "ORIqpQdpwj",
+            database: "asGr29M9g5"
+        })
 
         this.checkConnection();
     }
