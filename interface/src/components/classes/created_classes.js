@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/auth.context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
+import Users from "../user/users"
 import { Loader } from "../items/loader";
 
 function CretedClasses() {
@@ -46,7 +47,11 @@ function CretedClasses() {
                                 <p className="card-text">
                                     Код доступа: <b>{classes.access_code}</b>
                                 </p>
-                                
+                                <small>
+                                    <p className="card-text">
+                                        Создатель: <b><Users userid = {classes.user_created}></Users></b>
+                                    </p>
+                                </small>
                             </div>
                         </div>
                     </div>

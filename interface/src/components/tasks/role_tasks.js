@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Loader } from "../items/loader";
 import StudentTasks from "./student_tasks"
 import { useHistory } from "react-router-dom";
+import UsersTasks from "./users_tasks"
 import { useMessageError, useMessageSuccess } from "../../Hooks/message.hook";
 import './tasks.css';
 
@@ -22,7 +23,7 @@ function RoleTasks() {
       send_file: "",
     });
     var teacher = false
-    const ClassesNewsFeched = useCallback(async () => {
+    const TasksFeched = useCallback(async () => {
         try {
           const feched = await request(`/api/classes/get_task_by_id`, "GET", null, {taskId:taskId});
           setTasks(feched);
@@ -46,8 +47,8 @@ function RoleTasks() {
       };
 
       useEffect(() => {
-        ClassesNewsFeched();
-      }, [ClassesNewsFeched]);
+        TasksFeched();
+      }, [TasksFeched]);
 
       useEffect(() => {
         messageError(error);
@@ -68,7 +69,8 @@ function RoleTasks() {
                 if(task.user_id === auth.user_id){
                     return(
                         <div className = "contaniner mt-3">
-                            <h1>Оценка</h1>
+                            <h1>Отправленые задания</h1>
+                            <UsersTasks></UsersTasks>
                         </div>
                     )
                 }else{

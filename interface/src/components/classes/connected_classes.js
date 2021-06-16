@@ -4,6 +4,7 @@ import { useHttp } from "../../Hooks/http.hook.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/auth.context";
 import { Loader } from "../items/loader";
+import Users from "../user/users"
 import { useMessageError, uuseCallbackseMessageSuccess } from "../../Hooks/message.hook";
 
 function ConnectedClasses() {
@@ -45,7 +46,11 @@ function ConnectedClasses() {
                             <p className="card-text">
                                 Код доступа в класс: <b>{сonnectedС.access_code}</b>
                             </p>
-                            {/* <small><button className = "btn btn-danger">Покинуть класс</button></small> */}
+                            <small>
+                            <p className="card-text">
+                                Создатель: <b><Users userid = {сonnectedС.user_created}></Users></b>
+                            </p>
+                            </small>
                         </div>
                     </div>
                 </div>

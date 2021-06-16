@@ -129,6 +129,15 @@ class ClassesController {
         }
     }
 
+    findAllTasksWithoutRating = async(taskid,classid) => {
+        try{
+            const result = await TaskModel.findAllTasksWithoutRating(taskid,classid)
+            return result
+        }catch(e){
+            console.log(e)
+            throw res.status(500)
+        }
+    }
     createClass = async (req,res, next, user_id) => {
         const result = await ClassesModel.create(req,user_id);
 

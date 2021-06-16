@@ -71,7 +71,8 @@ function ClassesTasks() {
               <TaskClasses></TaskClasses>
               <h3>Задания класса</h3>
               {tasks.map((task, index, key) => {
-                if(task.user_id === auth.user_id){
+                if(task.class_id === parseInt(classId) && task.tasks){
+                  if(task.user_id === auth.user_id){
                   return(
                      <Link to = {`/abouttask/${task.id}`}>
                       <div className = "mt-3" key = {task.id}>
@@ -89,8 +90,7 @@ function ClassesTasks() {
                     </div>
                   </div>
                     </Link>
-                  )
-                }else{
+                  )}else{
                   return (
                     <Link to = {`/abouttask/${task.id}`}>
                     <div className = "mt-3" key = {task.id}>
@@ -110,7 +110,7 @@ function ClassesTasks() {
                     </Link>
                   );
                 }
-            })}
+          }})}
         </div>
     )
 }

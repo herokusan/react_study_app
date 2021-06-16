@@ -172,8 +172,6 @@ router.post("/send_task", async(req,res) => {
 router.get("/users",async(req,res) => {
   try{
     const classid = req.headers.classid
-    console.log("AAAAAAAAAAAAAAAAAA")
-    console.log(req.headers)
     const users = await ClassesController.findUserConnect(classid,res)
     if(users){
       res.json(users)
@@ -200,6 +198,29 @@ router.get("/get_student_work",async(req,res) => {
   }catch(e){
     console.log(e)
     res.status(500).json({ message: "Что то с учениками... Попробуйте перезагрузить страницу!" });
+  }
+})
+
+router.get("/get_all_tasks", async(req,res) => {
+  try{
+    const taskid = req.headers.taskid
+    const classid = req.headers.classid
+    const allTasks = await ClassesController.findAllTasksWithoutRating(taskid)
+    if(allTasks){
+      res.json(allTasks)
+    }else{
+      res.status(200)
+    }
+  }catch(e){
+    console.log(e)
+  }
+})
+router.post("/send_rating", async(req,res) => {
+  try{
+
+  }catch(e){
+    console.log(e)
+    res.status(500)
   }
 })
 module.exports = router;

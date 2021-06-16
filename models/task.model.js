@@ -18,6 +18,13 @@ class ContentModel {
         console.log(result)
         return result
     }
+
+    findAllTasksWithoutRating = async(taskid) => {
+        const sql = `SELECT * FROM ${this.tableName} WHERE tasks is null and response is not null and task_id = ${taskid}`
+        const result = await query(sql)
+        return result
+    }
+
     sendTask = async(userid,taskid,file_task) => {
         try{
             const class_id = `SELECT class_id FROM ${this.tableName} WHERE id = ${taskid}`
