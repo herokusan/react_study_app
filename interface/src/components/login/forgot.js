@@ -62,8 +62,7 @@ function Forgot() {
       const ForgotHandelr = async () => {
         try {
           const data = await request("/api/auth/forgot", "POST", { ...form });
-          console.log('ZZZZZZZZZZZZZZZ')
-          console.log(data)
+          messageSuccess(data.message);
         } catch (e) {
             console.log(e)
             messageError(e);

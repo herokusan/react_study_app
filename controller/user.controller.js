@@ -1,4 +1,5 @@
 const UserModel = require('../models/user.model');
+const nodemailer = require('nodemailer');
 const HttpException = require('../utils/HttpException.utils');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -54,10 +55,10 @@ class UserController {
         res.send(userWithoutPassword);
     };
 
+    // Для востановления пароля!
     findUserByEmail = async (email,res) => {
         const result = await UserModel.findUserByEmail(email)
         if(result){
-            console.log(">>>>>>>>>>>>>>")
             return result
         }else{
             return res.status(500)

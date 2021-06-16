@@ -57,7 +57,7 @@ router.post('/forgot', async(req,res) => {
   try{
     const email_user  = await userController.findUserByEmail(req.body.email, res)
     if(email_user.length > 0){
-
+      res.status(201).json({message:"Письмо отправлено на электронную почту"})
     }else{
       res.status(500).json({ message: "Пользователь с таким email не зарегестрирован" });
     }
