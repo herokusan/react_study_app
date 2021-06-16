@@ -10,7 +10,7 @@
     "npminstall": "npm install --prefix interface",
     "interface": "npm start --prefix interface",
     "start": "concurrently \"npm run npminstall\"  \"npm run migration\" \" npm run server\"  \"npm run interface \"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix interface && npm run build --prefix interface"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix interface"
   },
   "repository": {
     "type": "git",
