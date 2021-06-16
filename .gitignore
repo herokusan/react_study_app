@@ -1,3 +1,5 @@
 .node_modules/
 .idea/
 .idea
+.sicret.env/
+.sicret.env
